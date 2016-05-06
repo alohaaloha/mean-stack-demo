@@ -11,6 +11,36 @@ angular.module('wsapp', ['ngResource', 'ui.router'])
                     'content': {
                         templateUrl: 'welcome/welcome.html',
                         controller: 'WelcomeController'
+                    },
+                    'navbar':{
+                        templateUrl: 'navbar/navbar.html',
+                        //controller: 'WelcomeController'
+                    }
+                }
+            })
+        .state('signup', {
+                url: '/signup',
+                views: {
+                    'content': {
+                        templateUrl: 'auth/signup/signup.html',
+                        controller: 'SignupController'
+                    },
+                    'navbar':{
+                        templateUrl: 'navbar/navbar.html',
+                        //controller: 'WelcomeController'
+                    }
+                }
+            })
+        .state('signin', {
+                url: '/signin',
+                views: {
+                    'content': {
+                        templateUrl: 'auth/signin/signin.html',
+                        controller: 'SigninController'
+                    },
+                    'navbar':{
+                        templateUrl: 'navbar/navbar.html',
+                        //controller: 'WelcomeController'
                     }
                 }
             });

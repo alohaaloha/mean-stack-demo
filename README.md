@@ -1,7 +1,7 @@
 # web_services_pro
-Project for Web Services Course, Faculty of Technical Sciences, University of Novi Sad
 
-Stack:
-MEAN Stack
+-MEAN stack
+-Application similar to Trello.com. User can create project and add people to it, create tasks, monitor all tasks, etc...  
+
 
 

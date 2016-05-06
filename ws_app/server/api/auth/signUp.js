@@ -9,7 +9,7 @@ router
   .post('/signup', function(req, res) {
 
   if (!req.body.name || !req.body.password) {
-    res.json({success: false, msg: 'Please pass name and password.', sent:req.body});
+    res.json({success: false, msg: 'Please pass name and password.', BODY:req.body});
   } else {
     var newUser = new User({
       name: req.body.name,

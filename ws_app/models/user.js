@@ -12,6 +12,7 @@ var userSchema = new Schema({
     type: String,
     required: true,
   },
+  role: String,
   createdAt: Date
 });
 
@@ -22,9 +23,19 @@ userSchema.pre('save', function(next) {
   var currentDate = new Date();
   this.createdAt = currentDate;
 
+  // rola uvek 'user', pa onda rucno cemo odrediti ko ce biti admin
+  this.role='user';
+
   // predjemo na sledecu funckiju u lancu
   next();
 });
+
+
+userSchema.methods.createProject = function (projectName) {
+   //TODO
+};
+
+
 
 // od sheme kreiramo model koji cemo koristiti
 var User = mongoose.model('User', userSchema);
