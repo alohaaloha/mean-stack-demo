@@ -1,0 +1,16 @@
+{
+  "name": "ws_app",
+  "version": "1.0.0",
+  "description": "Project for Web services course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RM, NP, MM, BC",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.3.7"
+  }
+}
