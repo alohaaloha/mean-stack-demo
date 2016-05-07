@@ -3,7 +3,7 @@
 angular.module('wsapp')
     .controller('SignupController', function ($scope, authService, $location) {
 
- 		//signup button clicked
+ 		//button clicked
 	    $scope.signup = function(){
 
 		   authService.signup(

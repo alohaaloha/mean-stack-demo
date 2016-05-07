@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('wsapp')
-    .controller('WelcomeController', function ($scope) {
+    .controller('WelcomeController', function ($scope, $state) {
 
-	$scope.testVar="hello from controller";
-
+	$scope.bla="test"
 
     });

@@ -2,7 +2,21 @@ angular.module('wsapp')
 .service('authService', function($http){
 	return{
 		signin: function(username, password, onSuccess, onError){
-		//TODO
+		
+		var req = {
+		    method: 'POST',
+		    url: '/api/signin',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param({ 
+		    	name: username,
+		    	password: password 
+		    })
+		}	
+
+		$http(req).then(onSuccess, onError);
+		
 		},
 		signup: function(username, password, onSuccess, onError){
 
@@ -27,6 +41,9 @@ angular.module('wsapp')
 		},
         signout: function(onSuccess, onError){
         //TODO  
+        },
+        authenticate: function(token, onSuccess, onError){
+        //TODO
         }
 	}
 });

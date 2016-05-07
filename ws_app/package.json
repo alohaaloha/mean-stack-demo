@@ -9,8 +9,12 @@
   "author": "RM, NP, MM, BC",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
-    "mongoose": "^4.3.7"
+    "jwt-simple": "^0.5.0",
+    "mongoose": "^4.3.7",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.0.0"
   }
 }

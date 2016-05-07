@@ -3,10 +3,10 @@
 angular.module('wsapp', ['ngResource', 'ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise('/welcome');
+        $urlRouterProvider.otherwise('/home');
         $stateProvider
-        .state('welcome', {
-                url: '/welcome',
+        .state('home', {
+                url: '/home',
                 views: {
                     'content': {
                         templateUrl: 'welcome/welcome.html',

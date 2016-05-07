@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+/* https://www.npmjs.com/package/bcryptjs */
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+
 // kreiramo novu shemu
 var userSchema = new Schema({
   name: {
@@ -23,8 +27,9 @@ userSchema.pre('save', function(next) {
   var currentDate = new Date();
   this.createdAt = currentDate;
 
-  // rola uvek 'user', pa onda rucno cemo odrediti ko ce biti admin
-  this.role='user';
+  //transform password
+  var hash = bcrypt.hashSync(this.password, salt);
+  this.password=hash;
 
   // predjemo na sledecu funckiju u lancu
   next();

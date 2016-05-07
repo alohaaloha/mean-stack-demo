@@ -15,6 +15,7 @@ router
       name: req.body.name,
       password: req.body.password
     });
+    //in 'pre' we transform password (hashcode)
     // save the user
     newUser.save(function(err) {
       if (err) {

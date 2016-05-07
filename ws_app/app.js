@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 /* klijentsku angular aplikaciju serviramo iz direktorijuma client */
 app.use('/', express.static(__dirname + '/client'));
-//treba ovako nekako al nece
+//treba ovako nekako al nece TODO - pitati andjelica
 //app.get('*', function(req, res) {
 //        res.sendFile(__dirname + '/client/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 //    });
@@ -19,8 +19,8 @@ app.use('/', express.static(__dirname + '/client'));
 /* routers - api */
 var signUp=require('./server/api/auth/signUp');
 app.use('/api', signUp);
-
-
+var signIn=require('./server/api/auth/signIn');
+app.use('/api', signIn);
 
 
 /* start server */
