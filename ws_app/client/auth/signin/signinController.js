@@ -7,23 +7,23 @@ angular.module('wsapp')
 	    $scope.signin = function(){
 
 		   authService.signin(
-			   $scope.name, 
+			   $scope.username, 
 			   $scope.password, 
 			   function(response){
 				  
 				   console.log(response.data);	
 				   if(response.data.success==true){
-				   	alertify.success("WELCOME "+response.data.user);
+				   	alertify.success("WELCOME!");
 				   	$state.go('home');
 				   }else{
-				   	alertify.error(response.data.msg);
+				   	alertify.error("ERROR");
 				   }
 
 			   }
 			   ,function(response){
 
 					console.log(response.data);
-					alertify.error(response.data.msg);									   
+					alertify.error("ERROR");									   
 
 			   });
   		};

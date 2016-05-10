@@ -10,7 +10,7 @@ angular.module('wsapp')
 		        'Content-Type': 'application/x-www-form-urlencoded'
 		    },
 		    data: $.param({ 
-		    	name: username,
+		    	username: username,
 		    	password: password 
 		    })
 		}	
@@ -18,7 +18,7 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 		
 		},
-		signup: function(username, password, onSuccess, onError){
+		signup: function(username, email, password, onSuccess, onError){
 
 		var req = {
 		    method: 'POST',
@@ -27,7 +27,8 @@ angular.module('wsapp')
 		        'Content-Type': 'application/x-www-form-urlencoded'
 		    },
 		    data: $.param({ 
-		    	name: username,
+		    	username: username,
+		    	email: email,
 		    	password: password 
 		    })
 		}
@@ -42,8 +43,16 @@ angular.module('wsapp')
         signout: function(onSuccess, onError){
         //TODO  
         },
-        authenticate: function(token, onSuccess, onError){
-        //TODO
+        authenticate: function(onSuccess, onError){
+        
+        var req = {
+		    method: 'POST',
+		    url: '/api/authenticate'
+		}	
+
+		$http(req).then(onSuccess, onError);
+
+
         }
 	}
 });

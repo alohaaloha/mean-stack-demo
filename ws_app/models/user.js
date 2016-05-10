@@ -7,7 +7,7 @@ var salt = bcrypt.genSaltSync(10);
 
 // kreiramo novu shemu
 var userSchema = new Schema({
-  name: {
+  username: {
     type: String,
     required: true,
     unique: true
@@ -16,8 +16,13 @@ var userSchema = new Schema({
     type: String,
     required: true,
   },
-  role: String,
+  email:{
+    type: String,
+    required: true,
+    unique: true
+  },
   createdAt: Date
+  //lista ID od projekata?
 });
 
 
@@ -26,18 +31,16 @@ userSchema.pre('save', function(next) {
   // preuzmemo trenutni datum
   var currentDate = new Date();
   this.createdAt = currentDate;
-
   //transform password
   var hash = bcrypt.hashSync(this.password, salt);
   this.password=hash;
-
   // predjemo na sledecu funckiju u lancu
   next();
 });
 
 
 userSchema.methods.createProject = function (projectName) {
-   //TODO
+   //example
 };
 
 

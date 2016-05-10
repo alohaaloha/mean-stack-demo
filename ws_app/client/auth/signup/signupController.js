@@ -7,8 +7,9 @@ angular.module('wsapp')
 	    $scope.signup = function(){
 
 		   authService.signup(
-			   $scope.name, 
-			   $scope.password, 
+			   $scope.username, 
+			   $scope.email,
+			   $scope.password,
 			   function(response){
 				  
 				   console.log(response.data);	

@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/* https://www.npmjs.com/package/jwt-simple */
-var jwt = require('jwt-simple');
-var secret = 'xxx';
 /* https://www.npmjs.com/package/bcryptjs */
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
@@ -12,11 +9,11 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 
 
 router
-  .post('/signin', function(req, res) {
+  .post('/', function(req, res) {
 
      User.findOne(
 
-      {name: req.body.name}, 
+      {username: req.body.username}, 
       
       function(err, user) {
 
@@ -31,11 +28,12 @@ router
 
                   // check if password matches
                   if (bcrypt.compareSync(req.body.password, user.password)) {
-                    //create a token
-                    var token = jwt.encode(user, secret);
-                    // token bude neka kobaja tipa: alkLWkjkettclhjHHHJ-UYFTFJG
-                    //TODO - mozda ceo user da uzmem?!
-                    res.json({success: true, msg:'Successfully signed in!', user:user.name, token: 'JWT ' + token});
+
+                    /* add user to SESSION -  to acces session, just go: req.session.xxx */
+                    //TODO mozda neki DTO umesto cistog user
+                    req.session.user = user;
+
+                    res.send({success: true, msg:'Successfully signed in!'});
                   } else {
                     res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                   }

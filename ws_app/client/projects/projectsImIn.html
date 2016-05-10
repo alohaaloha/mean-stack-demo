@@ -1,0 +1,41 @@
+    <div >
+
+
+
+	<!-- LIST OF MY PROJECTS -->
+<h2>PROJECT I'M IN</h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+	            <tr>
+	                <th>PROJECT TITLE</th>
+	                <th>CREATED</th>
+	                <th>DEADLINE</th>
+	                <th></th>
+	            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collection">
+	                <td>{{model.name}}</td>
+	                <td>{{model.name}}</td>
+	                <td>{{model.name}}</td>                               
+		            <td>			            
+			           <button type="submit"      
+                                ui-sref="project.detail({id:model.name})"
+                                class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>OPEN PROJECT</span>
+                        </button>
+			        </td>  
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    
+
+
+
+
+
+    </div>
