@@ -87,8 +87,8 @@ angular.module('wsapp', ['ngResource', 'ui.router'])
                 url: '/project/{id}',
                 views: {
                     'content': {
-                        templateUrl: 'projects/projectsImIn.html',
-                        controller: 'ProjectsImInController'
+                        templateUrl: 'projects/projectDetail.html',
+                        controller: 'ProjectDetailController'
                     },
                     'navbar':{
                         templateUrl: 'navbar/navbar.html',
@@ -96,6 +96,19 @@ angular.module('wsapp', ['ngResource', 'ui.router'])
                     }
                 }
             })
+        .state('projectaddpeople', {
+                            url: '/projectaddpeople/{id}',
+                            views: {
+                                'content': {
+                                    templateUrl: 'projects/projectAddPeople.html',
+                                    controller: 'ProjectAddPeopleController'
+                                },
+                                'navbar':{
+                                    templateUrl: 'navbar/navbar.html',
+                                    //controller: 'WelcomeController'
+                                }
+                            }
+                        })
         .state('projectnew', {
                 url: '/projectnew',
                 views: {

@@ -3,7 +3,6 @@
 angular.module('wsapp')
     .controller('MyProjectsController', function ($scope, $state, authService, projectService) {
 
-
 	authService.authenticate(
                             function(response){
                                 if(!response.data.success)
@@ -19,7 +18,8 @@ angular.module('wsapp')
                                 if(!response.data.success){
                                 	$state.go('home');
                                 }else{
-                                	console.log(response.data);
+                                	console.log('DATA'+response.data);
+                                	$scope.collection=response.data.data;
                                 }
 
                             }, 
@@ -28,7 +28,6 @@ angular.module('wsapp')
                             });
 
 
-	$scope.collection=[{name:'lala'},{name:'lala'},{name:'lala'},{name:'lala'},{name:'lala'} ];
-	//TODO - ucitaj iz baze sve myProjects
+
 
     });

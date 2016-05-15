@@ -25,17 +25,36 @@ router
           if (!user) {
               res.send({success: false, msg: 'Authentication failed. User not found.'});
           } else {
-
                   // check if password matches
-                  if (bcrypt.compareSync(req.body.password, user.password)) {
-
+                /*  if (bcrypt.compareSync(req.body.password, user.password)) {
                     //TODO DTO umesto cistog user
                     req.session.user = user;
-
                     res.send({success: true, msg:'Successfully signed in!'});
                   } else {
-                    res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+                    res.send({success: false, msg: 'Authentication failed. Wrong password.', WTF:req.body.password+" "+user.password});
+                  }*/
+
+                  /*bcrypt.compare(req.body.password, user.password, function(erro, ress) {
+                      // res == true
+                      if(ress==true){
+                          req.session.user = user;
+                          res.send({success: true, msg:'Successfully signed in!'});
+                      }else{
+                      res.send({success: false, msg: 'Authentication failed. Wrong password.', err:erro});
+                      }
+
+                  });*/
+
+                  if (req.body.password===user.password) {
+                    //TODO DTO umesto cistog user
+                    req.session.user = user;
+                    res.send({success: true, msg:'Successfully signed in!'});
+                  } else {
+                    res.send({success: false, msg: 'Authentication failed. Wrong password.', WTF:req.body.password+" "+user.password});
                   }
+
+
+
           }
       }
       );

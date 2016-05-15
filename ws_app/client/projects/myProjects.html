@@ -18,21 +18,30 @@
 	                <th>PROJECT TITLE</th>
 	                <th>CREATED</th>
 	                <th>DEADLINE</th>
+                    <th>LAST UPDATE</th>
 	                <th></th>
 	            </tr>
             </thead>
             <tbody>
             <tr ng-repeat="model in collection">
-	                <td>{{model.name}}</td>
-	                <td>{{model.name}}</td>
-	                <td>{{model.name}}</td>                               
-		            <td>			            
-			           <button type="submit"      
-                                ui-sref="projectdetail({id:model.name})"
+	                <td>{{model.title}}</td>
+	                <td>{{model.createdAt}}</td>
+	                <td>{{model.deadline}}</td>
+                    <td>{{model.updatedAt}}</td>
+		            <td>
+			           <button type="submit"
+                                ui-sref="projectdetail({id:model._id})"
                                 class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>OPEN PROJECT</span>
                         </button>
-			        </td>  
+			        </td>
+                <td>
+                    <button type="submit"
+                            ui-sref="projectaddpeople({id:model._id})"
+                            class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;<span>ADD PEOPLE</span>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>

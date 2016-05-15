@@ -21,10 +21,7 @@ var userSchema = new Schema({
     required: true,
     unique: true
   },
-  createdAt: Date,
-  //lista ID od projekata?
-  myProjects:[],
-  otherProjects:[]
+  createdAt: Date
 });
 
 
@@ -34,8 +31,8 @@ userSchema.pre('save', function(next) {
   var currentDate = new Date();
   this.createdAt = currentDate;
   //transform password
-  var hash = bcrypt.hashSync(this.password, salt);
-  this.password=hash;
+  //var hash = bcrypt.hashSync(this.password, salt);
+  //this.password=hash;
   // predjemo na sledecu funckiju u lancu
   next();
 });

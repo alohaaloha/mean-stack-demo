@@ -11,6 +11,10 @@ var projectSchema = new Schema({
   description: {
     type: String,
   },
+  creator:{
+  type:String,
+  required:true
+  },
   deadline: Date,
   createdAt: Date,
   updatedAt: Date

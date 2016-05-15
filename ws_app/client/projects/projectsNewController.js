@@ -27,6 +27,7 @@ angular.module('wsapp')
                 if(response.data.success==true){
     			alertify.success("CREATED!");
     			console.log(response.data);
+    			$state.go('myprojects');
             }else{
                 alertify.success("FAIL!");
             }

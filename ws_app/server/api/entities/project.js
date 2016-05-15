@@ -15,40 +15,15 @@ router
   })
   .get('/', function(req, res) {
 
-   /* var resWannabe=[];
-    var bla=999;
-
-          User.findOne(
-
-            {_id: req.session.user._id}, 
-            
-            function(err, user) {
-
-                if (err){
-                    res.send({success: false, msg: 'Error.'});
-                    return;
-                }
-            
-                if (!user) {
-                    res.send({success: false, msg: 'User not found.'});
-                } else {
-
-                    bla=user;
-                    for(i=0; i<user.myProjects.length; i++){
-                          Project.findOne({ _id: user.myProjects[i] }, function (err, doc) {
-                            if (err) {
-                              res.send({success:false, msg:'U bazi sjeb'});
-                              return;
-                            }
-                            resWannabe.push(doc);
-                          });
-                    }
-
-                }//else
+    Project.find(
+          { creator: req.session.user._id },
+          function (err, doc) {
+            if (err) {
+              res.send({success:false, msg:'U bazi sjeb'});
+              return;
             }
-          );
-*/
-    res.json({success:true, msg:"yeeeey", projects:resWannabe, usr:req.session, aaa:bla});
+            res.json({success:true, msg:"DATA RESPONSE IS HERE :D ", data:doc});
+          });
 
   })
   .post('/', function(req, res, next) {
@@ -56,45 +31,35 @@ router
     if (!req.body) {
         res.json({success: false, msg: 'You need to enter data!'});
       } else {
-        var newProject = new Project(req.body);
-        //save
-        /* http://stackoverflow.com/questions/14481521/get-the-id-of-inserted-document-in-mongo-database-in-nodejs */
-        newProject.save(function(err, project) {
-
-          if (err) {
-            return res.json({success: false, msg: 'Error', err:err});
-          }
-          
-
-           User.findOne(
-
-            {_id: req.session.user._id}, 
-            
-            function(err, user) {
-
-                if (err){
-                    res.send({success: false, msg: 'Error.'});
-                    return;
+            var body=req.body;
+            body.creator=req.session.user._id;
+            var newProject = new Project(body);
+            /* http://stackoverflow.com/questions/14481521/get-the-id-of-inserted-document-in-mongo-database-in-nodejs */
+            newProject.save(function(err, project) {
+              if (err) {
+                return res.json({success: false, msg: 'Error', err:err});
+              }
+/*              User.findOne(
+                {_id: req.session.user._id},
+                function(err, user) {
+                    if (err){
+                        res.send({success: false, msg: 'Error.'});
+                        return;
+                    }
+                    if (!user) {
+                        res.send({success: false, msg: 'User not found.'});
+                    } else {
+                      user.myProjects.push(project._id);
+                      user.save();
+                      //updatujem user obj iz sesije
+                      req.session.user=user;
+                      res.json({success: true, msg: 'Successful created', fullSession:req.session});
+                    }
                 }
-            
-                if (!user) {
-                    res.send({success: false, msg: 'User not found.'});
-                } else {
-                  user.myProjects.push(project._id);
-                  user.save();
-                }
-            }
-            );
-
-          res.json({success: true, msg: 'Successful created', urs:req.session});
-
-        });
-
+               );*/
+              res.json({success: true, msg: 'Successful created', fullSession:req.session, body:body});
+            });
       }
-
-
-
-
 
   })
   .put('/:id', function(req, res, next) {
