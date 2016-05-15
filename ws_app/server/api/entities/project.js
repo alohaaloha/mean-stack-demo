@@ -10,7 +10,15 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 router
   .get('/:id', function(req, res, next) {
 
-    //TODO
+       Project.find(
+              { _id: req.params.id },
+              function (err, doc) {
+                if (err) {
+                  res.send({success:false, msg:'U bazi sjeb'});
+                  return;
+                }
+                res.json({success:true, msg:"DATA RESPONSE IS HERE :D ", data:doc});
+              });
 
   })
   .get('/', function(req, res) {
@@ -22,7 +30,7 @@ router
               res.send({success:false, msg:'U bazi sjeb'});
               return;
             }
-            res.json({success:true, msg:"DATA RESPONSE IS HERE :D ", data:doc});
+            res.json({success:true, msg:"PROJECT DATA ", data:doc});
           });
 
   })
@@ -31,8 +39,11 @@ router
     if (!req.body) {
         res.json({success: false, msg: 'You need to enter data!'});
       } else {
+
+            //add user to project
             var body=req.body;
             body.creator=req.session.user._id;
+
             var newProject = new Project(body);
             /* http://stackoverflow.com/questions/14481521/get-the-id-of-inserted-document-in-mongo-database-in-nodejs */
             newProject.save(function(err, project) {
@@ -64,7 +75,7 @@ router
   })
   .put('/:id', function(req, res, next) {
 
-    //TODO
+    //update existing
 
   })
   .delete('/:id', function(req, res, next) {

@@ -16,7 +16,9 @@ angular.module('wsapp')
 		
 		},
 		delete: function(){
-			
+
+			//TODO
+
 		}, 
 		get:function(onSuccess, onError){
 			var req = {
@@ -28,6 +30,35 @@ angular.module('wsapp')
 		}	
 
 		$http(req).then(onSuccess, onError);
+
+		},
+		getById:function(projectID, onSuccess, onError){
+
+			var req = {
+		    method: 'GET',
+		    url: '/api/project/'+projectID,
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    }
+		}
+
+		$http(req).then(onSuccess, onError);
+
+		},
+		update:function(projectID, onSuccess, onError){
+
+
+         var req = {
+		    method: 'GET',
+		    url: '/api/project/'+projectID,
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    }
+		    }
+
+		$http(req).then(onSuccess, onError);
+
+
 		}
 	}
 });

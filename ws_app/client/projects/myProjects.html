@@ -3,12 +3,12 @@
 
 
 	<!-- LIST OF MY PROJECTS -->
-<h2>MY PROJECTS</h2>
 
-	<!-- CREATE NEW PROJECT BTN-->
-     <button class="btn btn-primary" type="button" ui-sref="projectnew">
-        Create new project
-     </button>
+<h2>MY PROJECTS
+    <button class="btn btn-primary" type="button" ui-sref="projectnew">
+    Create new project
+    </button>
+</h2>
 
 
       <div class="table-responsive">
@@ -31,13 +31,13 @@
 		            <td>
 			           <button type="submit"
                                 ui-sref="projectdetail({id:model._id})"
-                                class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>OPEN PROJECT</span>
+                                class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>SEE PROJECT</span>
                         </button>
 			        </td>
                 <td>
                     <button type="submit"
-                            ui-sref="projectaddpeople({id:model._id})"
+                            ui-sref="userlist"
                             class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-user"></span>&nbsp;<span>ADD PEOPLE</span>
                     </button>

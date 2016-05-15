@@ -44,8 +44,9 @@ app.use('/api/signout', signout);
 /* crud for 'project' */
 var project=require('./server/api/entities/project');
 app.use('/api/project', project);
-/* crud for 'comment' */
-//var comment=re...
+/* crud for 'taks' */
+var project=require('./server/api/entities/task');
+app.use('/api/task', project);
 
 
 /* start server */
