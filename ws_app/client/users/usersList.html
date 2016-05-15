@@ -1,0 +1,32 @@
+<div>
+
+        <h1>USER LIST</h1>
+
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>USERNAME</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="model in collection">
+                    <td>{{model.name}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="home"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+</div>
