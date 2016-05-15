@@ -17,14 +17,19 @@ angular.module('wsapp')
 
     $scope.project={};
 
+    //click
     $scope.create=function(){
 
     	//alert($scope.project.title);
     	projectService.save(
     		$scope.project,
     		function(response){
+                if(response.data.success==true){
     			alertify.success("CREATED!");
     			console.log(response.data);
+            }else{
+                alertify.success("FAIL!");
+            }
 
     		}, 
     		function(response){

@@ -21,8 +21,10 @@ var userSchema = new Schema({
     required: true,
     unique: true
   },
-  createdAt: Date
+  createdAt: Date,
   //lista ID od projekata?
+  myProjects:[],
+  otherProjects:[]
 });
 
 
@@ -41,6 +43,8 @@ userSchema.pre('save', function(next) {
 
 userSchema.methods.createProject = function (projectName) {
    //example
+
+
 };
 
 

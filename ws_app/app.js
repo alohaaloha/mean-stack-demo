@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1/webproject');
 
-/* https://codeforgeek.com/2014/09/manage-session-using-node-js-express-4/ */
 app.use(session({
   cookieName: 'session',
   secret: 'random_string_goes_here',
@@ -33,6 +32,8 @@ var signIn=require('./server/api/auth/signIn');
 app.use('/api/signin', signIn);
 var authenticate=require('./server/api/auth/authenticate');
 app.use('/api/authenticate', authenticate);
+var signout=require('./server/api/auth/signout');
+app.use('/api/signout', signout);
 /* crud for 'project' */
 var project=require('./server/api/entities/project');
 app.use('/api/project', project);

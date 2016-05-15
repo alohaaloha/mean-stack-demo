@@ -17,6 +17,17 @@ angular.module('wsapp')
 		},
 		delete: function(){
 			
+		}, 
+		get:function(onSuccess, onError){
+			var req = {
+		    method: 'GET',
+		    url: '/api/project',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    }
+		}	
+
+		$http(req).then(onSuccess, onError);
 		}
 	}
 });

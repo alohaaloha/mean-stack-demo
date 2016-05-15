@@ -44,6 +44,19 @@ angular.module('wsapp', ['ngResource', 'ui.router'])
                     }
                 }
             })
+         .state('signout', {
+                url: '/signout',
+                views: {
+                    'content': {
+                        templateUrl: 'auth/signout/signout.html',
+                        controller: 'SignoutController'
+                    },
+                    'navbar':{
+                        templateUrl: 'navbar/navbar.html',
+                        //controller: 'WelcomeController'
+                    }
+                }
+            })
         .state('myprojects', {
                 url: '/myprojects',
                 views: {

@@ -41,7 +41,14 @@ angular.module('wsapp')
 
 		},
         signout: function(onSuccess, onError){
-        //TODO  
+
+		var req = {
+		    method: 'POST',
+		    url: '/api/signout'
+		}	
+
+		$http(req).then(onSuccess, onError);
+
         },
         authenticate: function(onSuccess, onError){
         

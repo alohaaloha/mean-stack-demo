@@ -29,8 +29,7 @@ router
                   // check if password matches
                   if (bcrypt.compareSync(req.body.password, user.password)) {
 
-                    /* add user to SESSION -  to acces session, just go: req.session.xxx */
-                    //TODO mozda neki DTO umesto cistog user
+                    //TODO DTO umesto cistog user
                     req.session.user = user;
 
                     res.send({success: true, msg:'Successfully signed in!'});
