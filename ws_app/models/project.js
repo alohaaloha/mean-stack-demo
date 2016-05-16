@@ -17,7 +17,8 @@ var projectSchema = new Schema({
   },
   deadline: Date,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  usersOnProject : [] 
 });
 
 

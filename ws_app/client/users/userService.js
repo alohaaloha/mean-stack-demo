@@ -20,9 +20,6 @@ angular.module('wsapp')
 		},
 		update:function(taskID, onSuccess, onError){
 
-
-
-
 		}
 	}
 });

@@ -5,7 +5,7 @@ angular.module('wsapp')
 
 
 authService.authenticate(
-                            function(response){
+                          function(response){
                                 if(!response.data.success)
                                 	$state.go('home');
                             },
