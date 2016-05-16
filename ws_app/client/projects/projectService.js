@@ -21,6 +21,7 @@ angular.module('wsapp')
 
 		}, 
 		get:function(onSuccess, onError){
+
 			var req = {
 		    method: 'GET',
 		    url: '/api/project',

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('wsapp')
-    .controller('NewTaskController', function ($scope, taskService, $state, authService, $stateParams) {
+    .controller('NewTaskController', function ($scope, $location, taskService, $state, authService, $stateParams) {
 
 
 	authService.authenticate(
@@ -28,8 +28,9 @@ angular.module('wsapp')
                 if(response.data.success==true){
     			alertify.success("CREATED!");
     			console.log(response.data);
-    			$state.go('myprojects');
-    			//todo - da idem na project/id projecta - nzm kako da GO na bas taav state kao sa sref
+    			$location.path('/project/'+$stateParams.id);
+    			//todo lepse
+
             }else{
                 alertify.success("FAIL!");
             }

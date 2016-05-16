@@ -47,12 +47,7 @@ angular.module('wsapp')
                                 },
                                 function(response){
 
-
-
                                 });
-
-
-
     }
 
 
@@ -74,8 +69,9 @@ angular.module('wsapp')
             if(response.data.success){
                 //dodato je u fulu sve
                 // kako da ne $scope.comments.push($scope.comment);
-                //$state.reload(); //TODO samo ovaj deo koji ucitava komentare a ne ceo state
-                getComments();
+                console.log(response.data.data);
+                $scope.comments.push(response.data.data);
+                //getComments();
             }
 
             },

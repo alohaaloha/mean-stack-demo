@@ -9,7 +9,7 @@ var Comment = require(__dirname+'/../../../models/comment'); // get the mongoose
 /*API for entity A*/
 router
   .get('/:id', function(req, res, next) {
-
+    /*GET COMMENT WITH ID*/
        Project.find(
               { _id: req.params.id },
               function (err, doc) {
@@ -22,7 +22,7 @@ router
 
   })
   .post('/task', function(req, res) {
-
+    /*GET COMMENTS FOR TASK ID*/
      Comment.find(
              { task: req.body.id },
              function (err, doc) {
@@ -35,12 +35,12 @@ router
 
   })
   .post('/', function(req, res, next) {
-
+    /*CREATE NEW COMMENT*/
     if (!req.body) {
         res.json({success: false, msg: 'You need to enter data!'});
       } else {
 
-            //add user to project
+            //add user to comment
             var body=req.body;
             body.creator=req.session.user._id;
 
@@ -50,7 +50,7 @@ router
               if (err) {
                 return res.json({success: false, msg: 'Error', err:err});
               }
-              res.json({success: true, msg: 'Successful created'});
+              res.json({success: true, msg: 'Successful created', data:comment});
             });
       }
 
@@ -58,9 +58,7 @@ router
   .put('/:id', function(req, res, next) {
 
     //update existing
-
-
-
+    //todo
 
   })
   .delete('/:id', function(req, res, next) {

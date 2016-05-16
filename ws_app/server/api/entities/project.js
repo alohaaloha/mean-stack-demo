@@ -9,7 +9,7 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 /*API for entity A*/
 router
   .get('/:id', function(req, res, next) {
-
+    /*GET PROJECT WITH ID*/
        Project.find(
               { _id: req.params.id },
               function (err, doc) {
@@ -22,7 +22,7 @@ router
 
   })
   .get('/', function(req, res) {
-
+    /*GET PROJECT FOR LOGED USER*/
     Project.find(
           { creator: req.session.user._id },
           function (err, doc) {
@@ -35,7 +35,7 @@ router
 
   })
   .post('/', function(req, res, next) {
-
+    /*CREATE NEW PROJECT*/
     if (!req.body) {
         res.json({success: false, msg: 'You need to enter data!'});
       } else {
@@ -50,32 +50,14 @@ router
               if (err) {
                 return res.json({success: false, msg: 'Error', err:err});
               }
-/*              User.findOne(
-                {_id: req.session.user._id},
-                function(err, user) {
-                    if (err){
-                        res.send({success: false, msg: 'Error.'});
-                        return;
-                    }
-                    if (!user) {
-                        res.send({success: false, msg: 'User not found.'});
-                    } else {
-                      user.myProjects.push(project._id);
-                      user.save();
-                      //updatujem user obj iz sesije
-                      req.session.user=user;
-                      res.json({success: true, msg: 'Successful created', fullSession:req.session});
-                    }
-                }
-               );*/
-              res.json({success: true, msg: 'Successful created', fullSession:req.session, body:body});
+              res.json({success: true, msg: 'Successful created'});
             });
       }
 
   })
   .put('/:id', function(req, res, next) {
 
-    //update existing
+    //todo
 
   })
   .delete('/:id', function(req, res, next) {

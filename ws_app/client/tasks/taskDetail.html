@@ -1,22 +1,18 @@
 <div >
 
-    <h2>
-        TASK DETAIL:
-    </h2>
     <div class="alert alert-success" role="alert">
+        <b>TASK INFO:</b> <br>
         TITLE: <h4>{{task.title}}</h4>
-        <br>
+
         CREATED: <h4>{{task.createdAt}}</h4>
-        <br>
+
         DEADLINE: <h4>{{task.status}}</h4>
-        <br>
+
         LAST UPDATE: <h4>{{task.updatedAt}}</h4>
     </div>
 
+    <!--COMMENTS-->
 
-    <h2>
-        COMMENTS:
-    </h2>
     <div class="alert alert-success" role="alert">
         COMMENTS ON TASK:
             <span class="badge">
@@ -25,7 +21,9 @@
         COMMENTS
         <br>
     </div>
+
     <!--COMMENTS LIST-->
+
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
