@@ -1,15 +1,15 @@
 angular.module('wsapp')
 .service('commentService', function($http){
 	return{
-		save: function(projectObj, onSuccess, onError){
+		save: function(obj, onSuccess, onError){
 
 		var req = {
 		    method: 'POST',
-		    url: '/api/project',
+		    url: '/api/comment',
 		    headers: {
 		        'Content-Type': 'application/x-www-form-urlencoded'
 		    },
-		    data: $.param(projectObj)
+		    data: $.param(obj)
 		}
 
 		$http(req).then(onSuccess, onError);
@@ -20,16 +20,18 @@ angular.module('wsapp')
 			//TODO
 
 		},
-		get:function(onSuccess, onError){
-			var req = {
-		    method: 'GET',
-		    url: '/api/project',
-		    headers: {
-		        'Content-Type': 'application/x-www-form-urlencoded'
-		    }
-		}
+		get:function(obj, onSuccess, onError){
+		  //get tasks for specific project
+            var req = {
+            method: 'POST',
+            url: '/api/comment/task',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: $.param(obj)
+            }
 
-		$http(req).then(onSuccess, onError);
+        $http(req).then(onSuccess, onError);
 
 		},
 		getById:function(projectID, onSuccess, onError){

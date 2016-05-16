@@ -1,46 +1,44 @@
 <div >
 
-    <h2>
-        TASK DETAIL:
-    </h2>
     <div class="alert alert-success" role="alert">
+        <b>TASK INFO:</b> <br>
         TITLE: <h4>{{task.title}}</h4>
-        <br>
+
         CREATED: <h4>{{task.createdAt}}</h4>
-        <br>
+
         DEADLINE: <h4>{{task.status}}</h4>
-        <br>
+
         LAST UPDATE: <h4>{{task.updatedAt}}</h4>
     </div>
 
+    <!--COMMENTS-->
 
-    <h2>
-        COMMENTS:
-    </h2>
     <div class="alert alert-success" role="alert">
         COMMENTS ON TASK:
             <span class="badge">
-                {{task.comments.length}}
+                {{comments.length}}
             </span>
         COMMENTS
         <br>
     </div>
+
     <!--COMMENTS LIST-->
+
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>PROJECT TITLE</th>
-                <th>CREATED</th>
-                <th>DEADLINE</th>
+                <th>COMMENT TEXT</th>
+                <th>CREATOR</th>
+                <th>DATE&TIME</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in task.comments">
-                <td>{{model.name}}</td>
-                <td>{{model.name}}</td>
-                <td>{{model.name}}</td>
+            <tr ng-repeat="model in comments">
+                <td>{{model.text}}</td>
+                <td>{{model.creator}}</td>
+                <td>{{model.updatedAt}}</td>
                 <td>
                     <button type="submit"
                             ui-sref="home"
@@ -60,9 +58,9 @@
 
 
     <!--ADD COMMENT FIELD-->
-    <div class="col-lg-6">
+    <div class="col-md-4 col-md-offset-4">
         <div class="input-group">
-            <input type="text" ng-model="comment" class="form-control" placeholder="Type comment...">
+            <input type="text" ng-model="comment.text" class="form-control" placeholder="Type comment...">
       <span class="input-group-btn">
         <button class="btn btn-success" type="button" ng-click="addComment()">ADD COMMENT</button>
       </span>
@@ -70,7 +68,7 @@
     </div><!-- /.col-lg-6 -->
 
 
-
+<br><br><br>
 
 
 

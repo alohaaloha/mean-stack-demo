@@ -9,7 +9,7 @@ var Comment = require(__dirname+'/../../../models/comment'); // get the mongoose
 /*API for entity A*/
 router
   .get('/:id', function(req, res, next) {
-
+    /*GET COMMENT WITH ID*/
        Project.find(
               { _id: req.params.id },
               function (err, doc) {
@@ -21,54 +21,36 @@ router
               });
 
   })
-  .get('/', function(req, res) {
-
-    Project.find(
-          { creator: req.session.user._id },
-          function (err, doc) {
-            if (err) {
-              res.send({success:false, msg:'U bazi sjeb'});
-              return;
-            }
-            res.json({success:true, msg:"PROJECT DATA ", data:doc});
-          });
+  .post('/task', function(req, res) {
+    /*GET COMMENTS FOR TASK ID*/
+     Comment.find(
+             { task: req.body.id },
+             function (err, doc) {
+               if (err) {
+                 res.send({success:false, msg:'U bazi sjeb'});
+                 return;
+               }
+               res.json({success:true, msg:"COMMENT DATA ", data:doc, body:req.body});
+             });
 
   })
   .post('/', function(req, res, next) {
-
+    /*CREATE NEW COMMENT*/
     if (!req.body) {
         res.json({success: false, msg: 'You need to enter data!'});
       } else {
 
-            //add user to project
+            //add user to comment
             var body=req.body;
             body.creator=req.session.user._id;
 
-            var newProject = new Project(body);
+            var newCom = new Comment(body);
             /* http://stackoverflow.com/questions/14481521/get-the-id-of-inserted-document-in-mongo-database-in-nodejs */
-            newProject.save(function(err, project) {
+            newCom.save(function(err, comment) {
               if (err) {
                 return res.json({success: false, msg: 'Error', err:err});
               }
-/*              User.findOne(
-                {_id: req.session.user._id},
-                function(err, user) {
-                    if (err){
-                        res.send({success: false, msg: 'Error.'});
-                        return;
-                    }
-                    if (!user) {
-                        res.send({success: false, msg: 'User not found.'});
-                    } else {
-                      user.myProjects.push(project._id);
-                      user.save();
-                      //updatujem user obj iz sesije
-                      req.session.user=user;
-                      res.json({success: true, msg: 'Successful created', fullSession:req.session});
-                    }
-                }
-               );*/
-              res.json({success: true, msg: 'Successful created', fullSession:req.session, body:body});
+              res.json({success: true, msg: 'Successful created', data:comment});
             });
       }
 
@@ -76,6 +58,7 @@ router
   .put('/:id', function(req, res, next) {
 
     //update existing
+    //todo
 
   })
   .delete('/:id', function(req, res, next) {

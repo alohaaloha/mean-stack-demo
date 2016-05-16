@@ -1,26 +1,18 @@
     <div >
 
-        <h2>
-            PROJECT DETAIL:
-        </h2>
 
         <div class="alert alert-success" role="alert">
+            <b>PROJECT INFO:</b> <br>
             TITLE: <h4>{{project.title}}</h4>
-            <br>
+
             CREATED: <h4>{{project.createdAt}}</h4>
-            <br>
+
             DEADLINE: <h4>{{project.deadline}}</h4>
-            <br>
+
             LAST UPDATE: <h4>{{project.updatedAt}}</h4>
         </div>
 
-
-        <h2>
-            TASKS:
-            <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
-                Create new task
-            </button>
-        </h2>
+       <!--TASKS-->
 
         <div class="alert alert-success" role="alert">
             TASKS ON PROJECT:
@@ -30,6 +22,15 @@
             TASKS
             <br>
         </div>
+
+        <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
+            Create new task
+        </button>
+
+        <br>
+        <br>
+
+        <!-- TASK LIST -->
 
         <div class="row">
             <div ng-repeat="model in tasks">

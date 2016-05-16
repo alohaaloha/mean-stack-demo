@@ -10,7 +10,7 @@ var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 /*API for entity A*/
 router
   .get('/:id', function(req, res, next) {
-
+    /*GET TASK WITH ID*/
     Task.find(
           { _id: req.params.id },
           function (err, doc) {
@@ -24,7 +24,8 @@ router
 
   })
   .post('/project/', function(req, res) {
-    //getting tasks for specific project
+
+    /*GET TASKS FOR PROJECT ID*/
         Task.find(
           { project: req.body.id },
           function (err, doc) {
@@ -38,6 +39,7 @@ router
   })
   .post('/', function(req, res, next) {
 
+    /*CREATING NEW TASK*/
     if (!req.body) {
         res.json({success: false, msg: 'You need to enter data!'});
       } else {
@@ -52,15 +54,16 @@ router
               if (err) {
                 return res.json({success: false, msg: 'Error', err:err});
               }
-              res.json({success: true, msg: 'Successful created', body:body});
+              res.json({success: true, msg: 'Successful created', data:task});
             });
       }
 
   })
   .put('/:id', function(req, res, next) {
 
-    //update existing
-            Task.findOne({
+    /*UPDATE TASK*/
+    //todo
+/*            Task.findOne({
               "_id": req.params.id},
              function(err, blogEntry) {
               if (err) next(err);
@@ -72,8 +75,7 @@ router
                 if (err) next(err);
                 res.json(blogEntry);
               });
-            });
-
+            });*/
 
 
   })
