@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('wsapp')
-    .controller('TaskDetailController', function ($scope, $state, authService, projectService, taskService, $stateParams) {
+    .controller('TaskDetailController', function ($scope, $state, authService, projectService, taskService, $stateParams, commentService) {
 
     authService.authenticate(
                             function(response){
@@ -23,6 +23,13 @@ angular.module('wsapp')
                     $scope.task=response.data.data[0];
                     console.log("TASKKKKK:")
                     console.log($scope.task);
+
+                    //GET COMMENTS FOT THIS TASK
+
+                     getComments();
+
+
+
             },
             function(response){
 
@@ -30,10 +37,52 @@ angular.module('wsapp')
      );
 
 
+    function getComments(){
+
+                          commentService.get(
+                                {id:$scope.task._id},
+                                function(response){
+                                        console.log(response.data);
+                                        $scope.comments=response.data.data;
+                                },
+                                function(response){
+
+
+
+                                });
+
+
+
+    }
+
+
+    $scope.comment={};
+    //creator se popuni na serverskoj strani
+    //text se popuni sa inputa
+    //task popunim dole, da ne bi bilo undefined odma
+
     $scope.addComment=function(){
 
-    //alert($scope.comment);
-    taskService.update();
+        //alert($scope.comment);
+        $scope.comment.task=$scope.task._id;
+
+        commentService.save(
+            $scope.comment,
+            function(response){
+
+            console.log(response.data);
+            if(response.data.success){
+                //dodato je u fulu sve
+                // kako da ne $scope.comments.push($scope.comment);
+                //$state.reload(); //TODO samo ovaj deo koji ucitava komentare a ne ceo state
+                getComments();
+            }
+
+            },
+            function(response){
+
+            }
+        );
 
 
     }

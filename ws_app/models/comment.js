@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 var commentSchema = new Schema({
-  signedBy:{
+  creator:{
       type: String,
       required: true
   },
@@ -14,7 +14,7 @@ var commentSchema = new Schema({
   task:{
       type: String,
       required: true
-  }
+  },
   createdAt: Date,
   updatedAt: Date
 });

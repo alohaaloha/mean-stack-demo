@@ -45,8 +45,11 @@ app.use('/api/signout', signout);
 var project=require('./server/api/entities/project');
 app.use('/api/project', project);
 /* crud for 'taks' */
-var project=require('./server/api/entities/task');
-app.use('/api/task', project);
+var task=require('./server/api/entities/task');
+app.use('/api/task', task);
+/* crud comments*/
+var comment=require('./server/api/entities/comment');
+app.use('/api/comment', comment);
 
 
 /* start server */

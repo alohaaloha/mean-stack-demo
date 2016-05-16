@@ -13,7 +13,8 @@ authService.authenticate(
                                $state.go('home');
                             });
 
-$scope.collection=[{name:'lala'},{name:'lala'},{name:'lala'},{name:'lala'},{name:'lala'} ];
+
+$scope.collection=[{name:'lala'},{name:'lala'},{name:'lala'},{name:'lala'},{name:'lala'}];
 
 
 

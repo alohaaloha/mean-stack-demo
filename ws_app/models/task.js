@@ -19,7 +19,6 @@ var taskSchema = new Schema({
   type:String,
   required:true
   },
-  comments:[],
   deadline: Date,
   createdAt: Date,
   updatedAt: Date
