@@ -1,6 +1,6 @@
 <div>
 
-        <h1>USER LIST</h1>
+        <h3>USERS ON THIS PROJECT</h3>
 
 
         <div class="table-responsive">
@@ -17,14 +17,43 @@
                     <td>
                         <button type="submit"
                                 ui-sref="home"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-minus"></span>&nbsp;<span>REMOVE</span>
                         </button>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+
+
+    <h3>USER LIST</h3>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>USERNAME</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collection">
+                <td>{{model.name}}</td>
+                <td>
+                    <button type="submit"
+                            ui-sref="home"
+                            class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 
 
 

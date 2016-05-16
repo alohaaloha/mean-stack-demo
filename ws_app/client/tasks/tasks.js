@@ -16,6 +16,19 @@ angular.module('wsapp')
                     }
                 }
         })
+        .state('taskdetail', {
+                        url: '/taskdetail/{id}',
+                        views: {
+                            'content': {
+                                templateUrl: 'tasks/taskDetail.html',
+                                controller: 'TaskDetailController'
+                            },
+                            'navbar':{
+                                templateUrl: 'navbar/navbar.html',
+                                //controller: 'WelcomeController'
+                            }
+                        }
+                })
         ;
 
 

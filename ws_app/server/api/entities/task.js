@@ -11,6 +11,15 @@ var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 router
   .get('/:id', function(req, res, next) {
 
+    Task.find(
+          { _id: req.params.id },
+          function (err, doc) {
+            if (err) {
+              res.send({success:false, msg:'U bazi sjeb'});
+              return;
+            }
+            res.json({success:true, msg:"TASK DATA by id ", data:doc});
+          });
 
 
   })
@@ -51,6 +60,21 @@ router
   .put('/:id', function(req, res, next) {
 
     //update existing
+            Task.findOne({
+              "_id": req.params.id},
+             function(err, blogEntry) {
+              if (err) next(err);
+              var newEntry = req.body;
+              blogEntry.title = newEntry.title;
+              blogEntry.description = newEntry.description;
+              blogEntry.entry = newEntry.entry;
+              blogEntry.save(function(err, blogEntry) {
+                if (err) next(err);
+                res.json(blogEntry);
+              });
+            });
+
+
 
   })
   .delete('/:id', function(req, res, next) {

@@ -1,67 +1,57 @@
     <div >
 
-        <div class="alert alert-success" role="alert"><h2>{{project.title}}</h2></div>
+        <h2>
+            PROJECT DETAIL:
+        </h2>
 
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>CREATED</th>
-                    <th>DEADLINE</th>
-                    <th>LAST UPDATE</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr >
-                    <td>{{project.createdAt}}</td>
-                    <td>{{project.deadline}}</td>
-                    <td>{{project.updatedAt}}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="alert alert-success" role="alert">
+            TITLE: <h4>{{project.title}}</h4>
+            <br>
+            CREATED: <h4>{{project.createdAt}}</h4>
+            <br>
+            DEADLINE: <h4>{{project.deadline}}</h4>
+            <br>
+            LAST UPDATE: <h4>{{project.updatedAt}}</h4>
         </div>
 
 
-
-        <br>
+        <h2>
+            TASKS:
+            <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
+                Create new task
+            </button>
+        </h2>
 
         <div class="alert alert-success" role="alert">
+            TASKS ON PROJECT:
             <span class="badge">
                 {{tasks.length}}
             </span>
             TASKS
-            <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
-                Create new task
-            </button>
+            <br>
         </div>
 
-        <br>
-
         <div class="row">
-        <div ng-repeat="model in tasks">
-
+            <div ng-repeat="model in tasks">
                 <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
 
+                    <div class="thumbnail">
                         <div class="caption">
                             <h3>{{model.title}}</h3>
-                            <p>...</p>
+                            <p>DESCRIPTION: {{model.description}}</p>
+                            <p>CREATED: {{model.createdAt}}</p>
+                            <p>STATUS: {{model.status}}</p>
                             <p>
-                                <button class="btn btn-success" type="button" ui-sref="home">
+                                <button class="btn btn-success" type="button" ui-sref="taskdetail({id:model._id})">
                                 See task
                                 </button>
-
                             </p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-
-
-
-
 
 
 

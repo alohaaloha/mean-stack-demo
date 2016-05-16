@@ -2,50 +2,44 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
-var taskSchema = new Schema({
-  title: {
+var commentSchema = new Schema({
+  signedBy:{
+      type: String,
+      required: true
+  },
+  text: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
-  description: {
-    type: String,
-  },
-  creator:{
-    type:String,
-    required:true
-    },
-  project:{
-  type:String,
-  required:true
-  },
-  comments:[],
-  deadline: Date,
+  task:{
+      type: String,
+      required: true
+  }
   createdAt: Date,
   updatedAt: Date
 });
 
+//mozemo da napravimo rekurzivnu shemu, pa da komentari imaju svoje podkomentare
+//commentSchema.add({comments:[commentSchema]});
 
 // prilikom snimanja se postavi datum
-taskSchema.pre('save', function(next) {
+commentSchema.pre('save', function(next) {
   // preuzmemo trenutni datum
   var currentDate = new Date();
+
   // postavimo trenutni datum poslednju izmenu
   this.updatedAt = currentDate;
 
-
   // ako nije postavljena vrednost za createdAt, postavimo je
-  if (!this.createdAt){
+  if (!this.createdAt)
     this.createdAt = currentDate;
-    }
+
   // predjemo na sledecu funckiju u lancu
   next();
 });
 
-
-
 // od sheme kreiramo model koji cemo koristiti
-var Task = mongoose.model('Task', taskSchema);
+var Comment = mongoose.model('Comment', commentSchema);
 
 // publikujemo kreirani model
-module.exports = Task;
+module.exports = Comment;
