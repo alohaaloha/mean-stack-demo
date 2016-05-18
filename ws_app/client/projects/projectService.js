@@ -48,18 +48,23 @@ angular.module('wsapp')
 		},
 		update:function(projectID, onSuccess, onError){
 
-
-         var req = {
-		    method: 'GET',
-		    url: '/api/project/'+projectID,
-		    headers: {
-		        'Content-Type': 'application/x-www-form-urlencoded'
-		    }
-		    }
+         
 
 		$http(req).then(onSuccess, onError);
 
 
+		},
+		
+		addUserToProject : function(projectID,userID,onSuccess,onError){
+			var req = {
+		    method: 'POST',
+		    url: '/api/user/project',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param({project : projectID, user :userID})
+			}
+			$http(req).then(onSuccess, onError);
 		}
 	}
 });

@@ -14,6 +14,7 @@ var projectSchema = new Schema({
   deadline: Date,
   createdAt: Date,
   updatedAt: Date,
+  usersOnProject : [{ type: Schema.Types.ObjectId, ref: 'User' }], 
   creator: {
       type: Schema.Types.ObjectId,
       ref: 'User'
@@ -23,7 +24,13 @@ var projectSchema = new Schema({
        ref: 'Task'
               }]
 });
-
+/**
+ * // napomena! komentari su u ovom primeru implementirani kao reference zbog ilustracije rada sa referencama
+  // u realnom sluacju bolje bi bilo implementirati ih kao poddokumente
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+ * 
+ * 
+ */
 
 // prilikom snimanja se postavi datum
 projectSchema.pre('save', function(next) {

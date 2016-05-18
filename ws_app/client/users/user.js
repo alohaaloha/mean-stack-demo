@@ -4,7 +4,7 @@ angular.module('wsapp')
     .config(function ($stateProvider) {
         $stateProvider
         .state('userlist', {
-                url: '/userlist',
+                url: '/user/project/{id}',
                 views: {
                     'content': {
                         templateUrl: 'users/usersList.html',
@@ -22,3 +22,4 @@ angular.module('wsapp')
         //$locationProvider.html5Mode(true);
 
     });
+    
