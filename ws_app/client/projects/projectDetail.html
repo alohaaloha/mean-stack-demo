@@ -10,6 +10,22 @@
             DEADLINE: <h4>{{project.deadline}}</h4>
 
             LAST UPDATE: <h4>{{project.updatedAt}}</h4>
+
+
+                <button type="submit"
+                        ui-sref="projectdetail({id:project._id})"
+                        class="btn btn-warning btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>EDIT PROJECT</span>
+                </button>
+
+                <button type="submit"
+                        ui-sref="projectdetail({id:project._id})"
+                        class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp;<span>DELETE PROJECT</span>
+                </button>
+
+
+
         </div>
 
        <!--TASKS-->
@@ -17,15 +33,19 @@
         <div class="alert alert-success" role="alert">
             TASKS ON PROJECT:
             <span class="badge">
-                {{tasks.length}}
+                {{project.tasks.length}}
             </span>
             TASKS
             <br>
+            <br>
+            <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
+                <span class="glyphicon glyphicon-plus"></span>
+                Create new task
+            </button>
+
         </div>
 
-        <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
-            Create new task
-        </button>
+
 
         <br>
         <br>
@@ -33,7 +53,7 @@
         <!-- TASK LIST -->
 
         <div class="row">
-            <div ng-repeat="model in tasks">
+            <div ng-repeat="model in project.tasks">
                 <div class="col-sm-6 col-md-4">
 
                     <div class="thumbnail">
@@ -42,9 +62,11 @@
                             <p>DESCRIPTION: {{model.description}}</p>
                             <p>CREATED: {{model.createdAt}}</p>
                             <p>STATUS: {{model.status}}</p>
+                            <p>CREATOR: {{model.creator.username}}</p>
                             <p>
                                 <button class="btn btn-success" type="button" ui-sref="taskdetail({id:model._id})">
-                                See task
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    SEE TASK
                                 </button>
                             </p>
                         </div>

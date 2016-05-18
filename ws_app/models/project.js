@@ -11,13 +11,17 @@ var projectSchema = new Schema({
   description: {
     type: String,
   },
-  creator:{
-  type:String,
-  required:true
-  },
   deadline: Date,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+     },
+  tasks:[{
+       type: Schema.Types.ObjectId,
+       ref: 'Task'
+              }]
 });
 
 

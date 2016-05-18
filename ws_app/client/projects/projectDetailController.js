@@ -13,40 +13,19 @@ angular.module('wsapp')
                             });
 
 
-    console.log('PARAM:'+$stateParams.id);
-
     projectService.getById(
-                                $stateParams.id,
-                                function(response){
-                                    if(!response.data.success){
-                                        $state.go('home');
-                                    }else{
-                                        console.log(response.data);
-                                        $scope.project=response.data.data[0]; //uvek vrati array al uvek 1(taj proj koji nadje)
-
-                                        //GET TASKS FOR THIS PROJECT
-
-                                        taskService.get(
-                                        {id:$scope.project._id},
-                                        function(response){
-                                                console.log(response.data);
-                                             $scope.tasks=response.data.data;
-                                        },
-                                        function(response){
-
-
-
-                                        });
-
-
-
-
-                                    }
-
-                                },
-                                function(response){
-                                   $state.go('home');
-                                });
+                            $stateParams.id,
+                            function(response){
+                                if(!response.data.success){
+                                    $state.go('home');
+                                }else{
+                                    console.log(response.data);
+                                    $scope.project=response.data.data; //uvek vrati array al uvek 1(taj proj koji nadje)
+                                }
+                            },
+                            function(response){
+                               $state.go('home');
+                            });
 
 
 

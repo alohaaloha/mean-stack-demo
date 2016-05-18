@@ -18,14 +18,21 @@ angular.module('wsapp')
                                 if(!response.data.success){
                                 	$state.go('home');
                                 }else{
-                                	console.log('DATA'+response.data);
+                                	console.log(response.data);
                                 	$scope.collection=response.data.data;
                                 }
-
                             }, 
                             function(response){
                                $state.go('home'); 
                             });
+
+
+
+
+
+
+
+
 
 
 

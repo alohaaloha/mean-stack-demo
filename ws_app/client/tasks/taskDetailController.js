@@ -13,42 +13,19 @@ angular.module('wsapp')
                             });
 
 
-    console.log('PARAM:'+$stateParams.id);
-
-
     taskService.getById(
             $stateParams.id,
             function(response){
                     console.log(response.data.data);
-                    $scope.task=response.data.data[0];
+                    $scope.task=response.data.data;
                     console.log("TASKKKKK:")
                     console.log($scope.task);
-
-                    //GET COMMENTS FOT THIS TASK
-
-                     getComments();
-
-
-
             },
             function(response){
 
             }
      );
 
-
-    function getComments(){
-
-                          commentService.get(
-                                {id:$scope.task._id},
-                                function(response){
-                                        console.log(response.data);
-                                        $scope.comments=response.data.data;
-                                },
-                                function(response){
-
-                                });
-    }
 
 
     $scope.comment={};
@@ -59,7 +36,7 @@ angular.module('wsapp')
     $scope.addComment=function(){
 
         //alert($scope.comment);
-        $scope.comment.task=$scope.task._id;
+        $scope.comment.task=$scope.task._id; //treba mi na serveru da znam u koji task da dodam comment (brisem ga posle toga)
 
         commentService.save(
             $scope.comment,
@@ -68,19 +45,15 @@ angular.module('wsapp')
             console.log(response.data);
             if(response.data.success){
                 //dodato je u fulu sve
-                // kako da ne $scope.comments.push($scope.comment);
                 console.log(response.data.data);
-                $scope.comments.push(response.data.data);
-                //getComments();
+                //TODO nemam username od upravokreirano
+                //response.data.data.creator.username='You (Few moments ago)';
+                $scope.task.comments.push(response.data.data);
             }
-
             },
             function(response){
-
             }
         );
-
-
     }
 
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('wsapp')
-    .controller('NewTaskController', function ($scope, $location, taskService, $state, authService, $stateParams) {
+    .controller('EditTaskController', function ($scope, $location, taskService, $state, authService, $stateParams) {
 
 
 	authService.authenticate(
@@ -15,10 +15,30 @@ angular.module('wsapp')
 
 
 
+    taskService.getById(
+    $stateParams.id,
+    function(res){
+        console.log('STIGO CEO');
+        console.log(res.data.data[0]);
+        if(res.data.success==true){
+            $scope.task=res.data.data[0];
+        }
+
+    },
+    function(res){
+
+
+    }
+    );
+
+
+
+
+
     //TASK OBJ
-    $scope.task={};
-        $scope.task.project=$stateParams.id; //id do projekta kome task pripada
-        $scope.task.status="TO DO"; //inicijalan status taska
+    //$scope.task={};
+      //  $scope.task.project=$stateParams.id; //id do projekta kome task pripada
+      //  $scope.task.status="TO DO"; //inicijalan status taska
         //creator se popuni na serveru
         //title, desc, deadline - html
 
@@ -26,13 +46,13 @@ angular.module('wsapp')
     $scope.create=function(){
 
     	//alert($scope.task.title);
-    	taskService.save(
+    	taskService.update(
     		$scope.task,
     		function(response){
                 if(response.data.success==true){
     			alertify.success("CREATED!");
     			console.log(response.data);
-    			$location.path('/project/'+$stateParams.id);
+    			$location.path('/taskdetail/'+$stateParams.id);
     			//todo lepse ovaj redirect
 
             }else{
