@@ -34,6 +34,7 @@ router
           });
 
   })
+
   .post('/', function(req, res, next) {
     /*CREATE NEW PROJECT*/
     if (!req.body) {
@@ -54,8 +55,18 @@ router
             });
       }
 
-  })
-  .put('/:id', function(req, res, next) {
+  }).post('/',function(req,res,next){
+    Project.find({_id :req.body.project}, function(err,doc){
+       if(err){
+           res.send({success:false, msg:'Error with datebase.'});
+                 return;
+       }
+       console.log("PROJEKAT NA KOJI DODAJEM USER-a"+doc);
+       console.log("User kojeg dodajem:",req.body.user);
+        
+    });
+    
+}).put('/:id', function(req, res, next) {
 
     //todo
 

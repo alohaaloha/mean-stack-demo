@@ -12,8 +12,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="model in collection">
-                    <td>{{model.name}}</td>
+                <tr ng-repeat="model in collectionUsersOnProject">
+                    <td>{{model.username}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="home"
@@ -41,11 +41,11 @@
             </thead>
             <tbody>
             <tr ng-repeat="model in collection">
-                <td>{{model.name}}</td>
+                <td>{{model.username}}</td>
                 <td>
-                    <button type="submit"
-                            ui-sref="home"
-                            class="btn btn-primary btn-sm">
+                    <button ui-sref="home"
+                            class="btn btn-primary btn-sm"
+                            ng-click="addUserToProjectController(model)">
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
                     </button>
                 </td>

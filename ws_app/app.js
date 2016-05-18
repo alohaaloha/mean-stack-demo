@@ -44,13 +44,16 @@ app.use('/api/signout', signout);
 /* crud for 'project' */
 var project=require('./server/api/entities/project');
 app.use('/api/project', project);
+
 /* crud for 'taks' */
 var task=require('./server/api/entities/task');
 app.use('/api/task', task);
 /* crud comments*/
 var comment=require('./server/api/entities/comment');
 app.use('/api/comment', comment);
-
+/* user api*/
+var user = require('./server/api/entities/user')
+app.use('/api/user/',user);
 
 /* start server */
 app.listen(port);
