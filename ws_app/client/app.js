@@ -17,7 +17,7 @@ angular.module('wsapp', ['ngResource', 'ui.router'])
                            //controller: 'WelcomeController'
                        }
                    }
-               })
+               });
         //$locationProvider.html5Mode(true);
 
     });

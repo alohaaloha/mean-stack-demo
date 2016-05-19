@@ -29,6 +29,19 @@ angular.module('wsapp')
                             }
                         }
                 })
+        .state('edittask', {
+                                url: '/edittask/{id}',
+                                views: {
+                                    'content': {
+                                        templateUrl: 'tasks/editTask.html',
+                                        controller: 'EditTaskController'
+                                    },
+                                    'navbar':{
+                                        templateUrl: 'navbar/navbar.html',
+                                        //controller: 'WelcomeController'
+                                    }
+                                }
+                        })
         ;
 
 

@@ -3,17 +3,13 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 var commentSchema = new Schema({
-  creator:{
-      type: String,
-      required: true
-  },
+  creator: {
+          type: Schema.Types.ObjectId,
+          ref: 'User'
+         },
   text: {
     type: String,
     required: true
-  },
-  task:{
-      type: String,
-      required: true
   },
   createdAt: Date,
   updatedAt: Date

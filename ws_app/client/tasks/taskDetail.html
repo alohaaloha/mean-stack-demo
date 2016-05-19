@@ -9,6 +9,16 @@
         DEADLINE: <h4>{{task.status}}</h4>
 
         LAST UPDATE: <h4>{{task.updatedAt}}</h4>
+
+        <button class="btn btn-warning" type="button" ui-sref="edittask({id:task._id})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            EDIT TASK
+        </button>
+        <button class="btn btn-danger" type="button" ui-sref="taskdetail({id:task._id})">
+            <span class="glyphicon glyphicon-trash"></span>
+            DELETE TASK
+        </button>
+
     </div>
 
     <!--COMMENTS-->
@@ -16,11 +26,12 @@
     <div class="alert alert-success" role="alert">
         COMMENTS ON TASK:
             <span class="badge">
-                {{comments.length}}
+                {{task.comments.length}}
             </span>
         COMMENTS
         <br>
     </div>
+
 
     <!--COMMENTS LIST-->
 
@@ -35,9 +46,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="model in comments">
+            <tr ng-repeat="model in task.comments">
                 <td>{{model.text}}</td>
-                <td>{{model.creator}}</td>
+                <td>{{model.creator.username}}</td>
                 <td>{{model.updatedAt}}</td>
                 <td>
                     <button type="submit"

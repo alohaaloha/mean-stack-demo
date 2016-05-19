@@ -11,14 +11,18 @@ var projectSchema = new Schema({
   description: {
     type: String,
   },
-  creator:{
-  type:String,
-  required:true
-  },
   deadline: Date,
   createdAt: Date,
   updatedAt: Date,
-  usersOnProject : [{ type: Schema.Types.ObjectId, ref: 'User' }] 
+  usersOnProject : [{ type: Schema.Types.ObjectId, ref: 'User' }], 
+  creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+     },
+  tasks:[{
+       type: Schema.Types.ObjectId,
+       ref: 'Task'
+              }]
 });
 /**
  * // napomena! komentari su u ovom primeru implementirani kao reference zbog ilustracije rada sa referencama

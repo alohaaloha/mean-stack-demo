@@ -47,16 +47,17 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 
 		},
-		update:function(taskID, onSuccess, onError){
+		update:function(taskObj, onSuccess, onError){
 
 
          var req = {
-		    method: 'GET',
-		    url: '/api/task/'+taskID,
+		    method: 'PUT',
+		    url: '/api/task',
 		    headers: {
 		        'Content-Type': 'application/x-www-form-urlencoded'
-		    }
-		    }
+		    },
+		    data:$.param(taskObj)
+		 }
 
 		$http(req).then(onSuccess, onError);
 

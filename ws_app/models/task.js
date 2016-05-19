@@ -11,14 +11,18 @@ var taskSchema = new Schema({
   description: {
     type: String,
   },
-  creator:{
-    type:String,
-    required:true
-    },
-  project:{
-  type:String,
-  required:true
+  creator: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+       },
+  status:{
+      type: String,
+      required: true
   },
+  comments:[{
+         type: Schema.Types.ObjectId,
+         ref: 'Comment'
+                }],
   deadline: Date,
   createdAt: Date,
   updatedAt: Date

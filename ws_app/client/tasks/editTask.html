@@ -1,6 +1,6 @@
 <div>
     <div class="col-md-4 col-md-offset-4">
-        <h1>CREATE NEW TASK</h1>
+        <h1>EDIT TASK</h1>
 
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">TITLE</span>
@@ -16,19 +16,19 @@
             <input type="date" class="form-control" ng-model="task.deadline">
         </div>
 
-
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default" ng-click="changeStatus('TO DO')">TO DO</button>
-                <button type="button" class="btn btn-default" ng-click="changeStatus('IN PROGRESS')">IN PROGRESS</button>
-                <button type="button" class="btn btn-default" ng-click="changeStatus('VERIFY')">VERIFY</button>
-                <button type="button" class="btn btn-default" ng-click="changeStatus('DONE')">DONE</button>
-            </div>
+        TASK STATUS: {{task.status}}
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" ng-click="changeStatus('TO DO')">TO DO</button>
+            <button type="button" class="btn btn-default" ng-click="changeStatus('IN PROGRESS')">IN PROGRESS</button>
+            <button type="button" class="btn btn-default" ng-click="changeStatus('VERIFY')">VERIFY</button>
+            <button type="button" class="btn btn-default" ng-click="changeStatus('DONE')">DONE</button>
+        </div>
 
 
 
         <div class="col-md-4 col-md-offset-4">
             <button class="btn btn-primary" type="button" ng-click="create()">
-                CREATE
+                SAVE
             </button>
         </div>
 
