@@ -10,8 +10,14 @@ router
 
       if(req.session.user){
       //TODO neki normalan reset sesije
-      	req.session.user=null;
-      	res.send({success: true, msg:"Logged out"});
+      	//req.session.user=null;
+
+        req.session.destroy(function(err) {
+            // cannot access session here
+            console.log('nema sessijee');
+        });
+
+        res.send({success: true, msg:"Logged out"});
       }else{
       	res.send({success: true, msg:"Nikog nema svakako"});
       }

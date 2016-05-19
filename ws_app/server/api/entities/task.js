@@ -36,22 +36,46 @@ router
   })
   .post('/project/', function(req, res) {
 
-    /*GET TASKS FOR PROJECT ID*/
+    /*GET TASKS FOR PROJECT ID that belongs to logged user*/
+    //TODO
 
-/*
-          Task.find(
-          { project: req.body.id },
-          function (err, doc) {
-            if (err) {
-              res.send({success:false, msg:'U bazi sjeb'});
-              return;
-            }
-            res.json({success:true, msg:"TASK DATA ", data:doc, body:req.body});
-          });
-*/
+      Project.find(
+            { _id: req.body.id },
+            function (err, doc) {
+              if (err) {
+                //res.send({success:false, msg:'U bazi sjeb'});
+                return;
+              }
+               //res.json({success:true, msg:"PROJECT DATA ", data:doc});
+            }).populate('creator')
+            .exec(function(err, entry) {
+                    // ako se desila greska predjemo na sledeci middleware (za rukovanje greskama)
+                    if (err) next(err);
+                    //res.json({success:true, msg:"PROJECT DATA ", data:entry});
+
+                           //entry - ima sve taskove
+                           //nalazim one koji pripadaju useruy
+                        /*  Task.find(
+                          { project: req.body.id },
+                          function (err, doc) {
+                            if (err) {
+                              res.send({success:false, msg:'U bazi sjeb'});
+                              return;
+                            }
+                            res.json({success:true, msg:"TASK DATA ", data:doc, body:req.body});
+                          });*/
 
 
-          
+             });
+
+
+
+
+
+
+
+
+
 
   })
   .post('/', function(req, res, next) {
@@ -100,6 +124,7 @@ router
           taskEntry.deadline = newEntry.deadline;
           taskEntry.createdAt = newEntry.createdAt;
           taskEntry.updatedAt = newEntry.updatedAt;
+          taskEntry.priority=newEntry.priority;
           taskEntry.save(function(err, taskEntry) {
             if (err)
                 next(err);

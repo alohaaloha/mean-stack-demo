@@ -53,6 +53,10 @@ angular.module('wsapp')
         $scope.task.status=status;
     }
 
+    $scope.changePriority=function(priority){
+        //alert(status);
+        $scope.task.priority=priority;
+    }
 
 
 

@@ -16,19 +16,16 @@ angular.module('wsapp')
 
 
     taskService.getById(
-    $stateParams.id,
-    function(res){
-        console.log('STIGO CEO');
-        console.log(res.data.data[0]);
-        if(res.data.success==true){
-            $scope.task=res.data.data[0];
-        }
-
-    },
-    function(res){
-
-
-    }
+      $stateParams.id,
+      function(res){
+          console.log('STIGO CEO');
+          console.log(res.data.data);
+          if(res.data.success==true){
+              $scope.task=res.data.data;
+          }
+      },
+      function(res){
+      }
     );
 
 
@@ -53,16 +50,12 @@ angular.module('wsapp')
     			alertify.success("CREATED!");
     			console.log(response.data);
     			$location.path('/taskdetail/'+$stateParams.id);
-    			//todo lepse ovaj redirect
-
             }else{
                 alertify.success("FAIL!");
             }
-
     		},
     		function(response){
-				alertify.success("FAIL!");
-
+				      alertify.success("FAIL!");
     		});
 
     };
@@ -73,6 +66,10 @@ angular.module('wsapp')
         $scope.task.status=status;
     }
 
+  $scope.changePriority=function(priority){
+        //alert(status);
+        $scope.task.priority=priority;
+    }
 
 
 

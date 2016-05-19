@@ -6,9 +6,17 @@
 
         CREATED: <h4>{{task.createdAt}}</h4>
 
-        DEADLINE: <h4>{{task.status}}</h4>
-
         LAST UPDATE: <h4>{{task.updatedAt}}</h4>
+
+        STATUS: <h4>{{task.status}}</h4>
+
+        PRIORITY: <h4>{{task.priority}}</h4>
+
+
+        <button class="btn btn-default" type="button" ui-sref="taskdetail({id:task._id})">
+            <span class="glyphicon glyphicon-time"></span>
+            TASK HISTORY
+        </button>
 
         <button class="btn btn-warning" type="button" ui-sref="edittask({id:task._id})">
             <span class="glyphicon glyphicon-pencil"></span>
@@ -18,6 +26,7 @@
             <span class="glyphicon glyphicon-trash"></span>
             DELETE TASK
         </button>
+
 
     </div>
 
@@ -61,6 +70,7 @@
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>DELETE</span>
                     </button>
+
                 </td>
             </tr>
             </tbody>

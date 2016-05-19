@@ -46,8 +46,11 @@ angular.module('wsapp')
             if(response.data.success){
                 //dodato je u fulu sve
                 console.log(response.data.data);
-                //TODO nemam username od upravokreirano
                 //response.data.data.creator.username='You (Few moments ago)';
+                //cannot create property on string //why?!
+                delete response.data.data.creator;
+                response.data.data.creator={};
+                response.data.data.creator.username="You (Few moments ago)";
                 $scope.task.comments.push(response.data.data);
             }
             },

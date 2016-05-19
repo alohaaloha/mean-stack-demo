@@ -21,6 +21,7 @@ var userSchema = new Schema({
     required: true,
     unique: true
   },
+  role:String,
   createdAt: Date
 });
 
@@ -30,6 +31,7 @@ userSchema.pre('save', function(next) {
   // preuzmemo trenutni datum
   var currentDate = new Date();
   this.createdAt = currentDate;
+  this.role='user';
   //transform password
   //var hash = bcrypt.hashSync(this.password, salt);
   //this.password=hash;

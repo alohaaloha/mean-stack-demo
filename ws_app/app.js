@@ -55,6 +55,8 @@ app.use('/api/comment', comment);
 var user = require('./server/api/entities/user')
 app.use('/api/user/',user);
 
+
+
 /* start server */
 app.listen(port);
 console.log('Server is running on port: ' + port);

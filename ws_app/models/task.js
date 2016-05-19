@@ -19,13 +19,16 @@ var taskSchema = new Schema({
       type: String,
       required: true
   },
+  priority:{type: String,
+  },
   comments:[{
          type: Schema.Types.ObjectId,
          ref: 'Comment'
                 }],
   deadline: Date,
   createdAt: Date,
-  updatedAt: Date
+  updatedAt: Date,
+  taskHistory:[] //celi objekti ovde
 });
 
 

@@ -24,9 +24,16 @@
                     <span class="glyphicon glyphicon-trash"></span>&nbsp;<span>DELETE PROJECT</span>
                 </button>
 
+                <button type="submit"
+                        ui-sref="userlist({id:project._id})"
+                        class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;<span>TEAM</span>
+                </button>
+
 
 
         </div>
+
 
        <!--TASKS-->
 
@@ -36,14 +43,23 @@
                 {{project.tasks.length}}
             </span>
             TASKS
-            <br>
-            <br>
+
             <button class="btn btn-primary" type="button" ui-sref="newtask({id:project._id})">
                 <span class="glyphicon glyphicon-plus"></span>
                 Create new task
             </button>
 
+
+            <br>
+            <br>
+            SHOWING: {{taskinfo}}
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-click="allTasks()">ALL TASKS</button>
+                <button type="button" class="btn btn-default" ng-click="myTasks()">MY TASKS</button>
+            </div>
+
         </div>
+
 
 
 
@@ -61,8 +77,10 @@
                             <h3>{{model.title}}</h3>
                             <p>DESCRIPTION: {{model.description}}</p>
                             <p>CREATED: {{model.createdAt}}</p>
-                            <p>STATUS: {{model.status}}</p>
                             <p>CREATOR: {{model.creator.username}}</p>
+                            <p>STATUS: {{model.status}}</p>
+                            <p>PRIORITY: {{model.priority}}</p>
+
                             <p>
                                 <button class="btn btn-success" type="button" ui-sref="taskdetail({id:model._id})">
                                     <span class="glyphicon glyphicon-th-list"></span>
