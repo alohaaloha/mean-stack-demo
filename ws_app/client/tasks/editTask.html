@@ -10,11 +10,22 @@
             <span class="input-group-addon" id="basic-addon1">DESCRIPTION</span>
             <input type="text" class="form-control"  ng-model="task.description">
         </div>
-
+        TASK DEADLINE: {{task.deadline}}
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">DEADLINE</span>
             <input type="date" class="form-control" ng-model="task.deadline">
         </div>
+
+        TASK PRIORITY: {{task.priority}}
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" ng-click="changePriority('BLOCKER')">BLOCKER</button>
+            <button type="button" class="btn btn-default" ng-click="changePriority('CRITICAL')">CRITICAL</button>
+            <button type="button" class="btn btn-default" ng-click="changePriority('MAJOR')">MAJOR</button>
+            <button type="button" class="btn btn-default" ng-click="changePriority('MINOR')">MINOR</button>
+            <button type="button" class="btn btn-default" ng-click="changePriority('TRIVIAL')">TRIVIAL</button>
+        </div>
+
+
 
         TASK STATUS: {{task.status}}
         <div class="btn-group" role="group" aria-label="...">
