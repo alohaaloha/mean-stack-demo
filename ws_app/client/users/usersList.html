@@ -1,8 +1,10 @@
 <div>
 
-        <h3>USERS ON THIS PROJECT</h3>
+        <h3>USERS ON THIS PROJECT <span class="badge">
+                {{collectionUsersOnProject.length}}
+            </span> </h3>
 
-
+        
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -14,9 +16,9 @@
                 <tbody>
                 <tr ng-repeat="model in collectionUsersOnProject">
                     <td>{{model.username}}</td>
+                    
                     <td>
-                        <button type="submit"
-                                ui-sref="home"
+                        <button ng-click="removeUserFromProjectController(model)"
                                 class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-minus"></span>&nbsp;<span>REMOVE</span>
                         </button>
@@ -28,7 +30,9 @@
 
 
 
-    <h3>USER LIST</h3>
+    <h3>USER LIST <span class="badge">
+                {{collection.length}}
+            </span> </h3>
 
 
     <div class="table-responsive">
@@ -43,7 +47,7 @@
             <tr ng-repeat="model in collection">
                 <td>{{model.username}}</td>
                 <td>
-                    <button ui-sref="home"
+                    <button 
                             class="btn btn-primary btn-sm"
                             ng-click="addUserToProjectController(model)">
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>

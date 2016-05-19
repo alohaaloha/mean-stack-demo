@@ -65,6 +65,19 @@ angular.module('wsapp')
 		    data: $.param({project : projectID, user :userID})
 			}
 			$http(req).then(onSuccess, onError);
+		},
+		removeUserFromProjectController: function(projectID,userID,onSuccess,onError){
+			var req = {
+		    method: 'DELETE',
+		    url: '/api/user',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param({project : projectID, user :userID})
+			}
+			$http(req).then(onSuccess, onError);
+			
 		}
+		
 	}
 });
