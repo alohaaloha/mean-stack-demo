@@ -51,17 +51,17 @@ userService.getAll(function(response){
                                            console.log("1");
                                            console.log(response.data);    
                                     }else{
-                                            console.log("2");
+                                            console.log("1");
                                             console.log(response.data);
                                             
                                            // $scope.collection = response.data.users;   
                                         }
                                      },
                                      function(response){
-                                            console.log("3");
-                                            console.log(response.data); 
+                                          
                                             $state.go('home');
-                                            
+                                            console.log("1");
+                                            console.log(response.data); 
                                     } 
             );
     }
