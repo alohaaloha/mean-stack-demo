@@ -62,8 +62,8 @@ angular.module('wsapp')
     }
     
      $scope.deleteTaskFromProject =  function(taskObj){
-               console.log("IDDDDDDDDDDDDDDDDDD:")
-               console.log(taskObj);
+             
+              
                taskService.delete(taskObj,function(response){
                    //edittask({id:task._id})
                   if(response.data.success){
@@ -78,20 +78,22 @@ angular.module('wsapp')
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     $scope.deleteComment= function(taskID,comment){
+            commentService.delete(taskID,comment._id,function(response){
+                 if(response.data.success){
+                          console.log("Deleted comment!");
+                          //console.log(response.data);
+                          //$state.go('taskdetail',{id:taskID});
+                          var index = $scope.task.comments.indexOf(comment);
+                          if (index > -1) {
+                               $scope.task.comments.splice(index, 1);
+                          }
+                          
+                          
+                  }
+            },function(response){
+                 $state.go('home');
+            })
+     }
 
     });

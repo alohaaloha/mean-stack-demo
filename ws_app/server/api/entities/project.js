@@ -81,10 +81,14 @@ router
     //todo
 
   })
-  .delete('/:id', function(req, res, next) {
-
-    //TODO
-
+  .delete('/', function(req, res, next) {
+         
+         Project.remove({"_id":req.body._id},function (err, successIndicator) {
+                    if(err) next(err);
+                                        
+                     res.json({success: true, msg: 'Successful deleted!'});
+                    
+               });
   });
 
 

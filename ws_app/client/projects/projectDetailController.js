@@ -54,15 +54,22 @@ angular.module('wsapp')
       //inicijalno prikazuje sve taskove
       $scope.allTasks();
 
-
-
-
-
-
-
-
-
-
-
+      $scope.deleteProject = function(project){
+          console.log("PROJEKAT KOJI SE BRISE")
+          console.log(project);
+          projectService.delete(project,function(response){
+              if(!response.data.success){
+                                          $state.go('home');
+                                      }else{
+                                          console.log(response.data);
+                                          //$scope.project=response.data.data;
+                                          $state.go('myprojects');
+                                      }
+          },function(response){
+               $state.go('home');
+          })
+          
+      }
+        
 
     });

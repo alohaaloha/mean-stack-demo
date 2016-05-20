@@ -15,10 +15,16 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 		
 		},
-		delete: function(){
-
-			//TODO
-
+		delete: function(project,onSuccess,onError){
+			var req = {
+		    method: 'DELETE',
+		    url: '/api/project',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param(project)
+			}
+			$http(req).then(onSuccess, onError);
 		}, 
 		get:function(onSuccess, onError){
 
@@ -88,8 +94,9 @@ angular.module('wsapp')
 		    }
 			}
 			$http(req).then(onSuccess, onError);
-		}
+			
 		
+		}
 		
 	}
 });
