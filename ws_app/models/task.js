@@ -28,7 +28,7 @@ var taskSchema = new Schema({
   deadline: Date,
   createdAt: Date,
   updatedAt: Date,
-  taskHistory:[] //celi objekti ovde
+  taskHistory:[] //celi objekti task-a ovde
 });
 
 

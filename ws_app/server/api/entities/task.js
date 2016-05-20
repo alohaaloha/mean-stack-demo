@@ -37,7 +37,7 @@ router
   .post('/project/', function(req, res) {
 
     /*GET TASKS FOR PROJECT ID that belongs to logged user*/
-    //TODO
+    //TODO aaaaaaaaaaa
 
       Project.find(
             { _id: req.body.id },
@@ -67,15 +67,6 @@ router
 
 
              });
-
-
-
-
-
-
-
-
-
 
   })
   .post('/', function(req, res, next) {
@@ -109,17 +100,17 @@ router
   .put('/', function(req, res, next) {
 
     /*UPDATE TASK*/
-        Task.findOne(
+    //v01 - see v02 (findoneandupdate)
+  /*      Task.findOne(
         {"_id": req.body._id},
          function(err, taskEntry) {
           if (err)
             next(err);
-            //todo - ima findoneandupdate funkcija
+
           var newEntry = req.body;
           taskEntry.title = newEntry.title;
           taskEntry.description = newEntry.description;
           taskEntry.creator = newEntry.creator;
-          taskEntry.project = newEntry.project;
           taskEntry.status = newEntry.status;
           taskEntry.deadline = newEntry.deadline;
           taskEntry.createdAt = newEntry.createdAt;
@@ -132,6 +123,41 @@ router
             res.json({success: true, msg: 'Successful created', data:taskEntry});
           });
         });
+*/
+
+        //v02
+        Task.findOne(
+          {"_id":req.body._id},
+          function (err, entry) {
+              if(err) next(err);
+
+
+              delete req.body.comments;
+              delete req.body.taskHistory;
+              
+
+              console.log('BODY:');
+              console.log(req.body);
+                Task.findByIdAndUpdate(
+                  entry._id,
+                  {$push:{"taskHistory":req.body},
+                  'title':req.body.title,
+                  'description':req.body.description,
+                  'creator': req.session.user._id,
+                  'status': req.body.status,
+                  'priority':req.body.priority,
+                  'deadline': req.body.deadline,
+                  'createdAt': req.body.createdAt,
+                  'updatedAt': req.body.updatedAt
+                  },
+                  function (err, entryT) {
+                  if(err) next(err);
+                  //res.json(entry);
+                  res.json({success: true, msg: 'Successful edited', data:entryT});
+                });
+          });
+
+
 
 
   })
