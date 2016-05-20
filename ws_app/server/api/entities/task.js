@@ -161,9 +161,42 @@ router
 
 
   })
-  .delete('/:id', function(req, res, next) {
+  .delete('/', function(req, res, next) {
+                console.log(req.body._id);
+                
+                Task.remove({"_id":req.body._id},function (err, successIndicator) {
+                    if(err) next(err);
+                                        
+                    Project.find({},function(err,entry){
+                            if(err)next(err);
+                            
+                            var idetificator; 
+                            var changedList;
+                            for(var i =0;i<entry.length;i++){
+                                var index = entry[i].tasks.indexOf(req.body._id);
+                                if (index > -1) {
+                                    entry[i].tasks.splice(index, 1);
+                                    idetificator = entry[i]._id; 
+                                    changedList = entry[i].tasks;
+                                    break;
+                                }
+                            }
+                            
+                            
+                            Project.findByIdAndUpdate(idetificator, {"tasks":changedList}, function (err, entry1) {
+                                      if(err) next(err);
+                                                  //res.json(entry);
+                                        res.json({success: true, msg: 'Successful deleted!', project:entry1._id});
+                            });
+                            
+                            
+                            
 
-    //TODO
+                    })
+                    
+                     
+               });
+           
 
   });
 

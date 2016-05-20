@@ -62,10 +62,28 @@ router
     //todo
 
   })
-  .delete('/:id', function(req, res, next) {
-
-    //TODO
-
+  .delete('/', function(req, res, next) {
+       console.log("entered delete of comments")
+       console.log(req.body)
+         Comment.remove({"_id":req.body.comment},function (err, successIndicator) {
+                    if(err) next(err);
+                    
+                   Task.findOne({"_id":req.body.task},function (err, entry) {
+                          
+                                var index = entry.comments.indexOf(req.body.comment);
+                                if (index > -1) {
+                                    entry.comments.splice(index, 1);   
+                                }
+                                var changelist = entry.comments;
+                                Task.findByIdAndUpdate(req.body.task, {"comments":changelist}, function (err, entry) {
+                                    if(err) next(err);
+                                        res.json({success: true, msg: 'Successful deleted comment from task.', task:req.body.task});
+                                  });
+                     
+                   })                 
+                    //  res.json({success: true, msg: 'Successful deleted!'});
+                    
+               });
   });
 
 

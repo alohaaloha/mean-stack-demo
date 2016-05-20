@@ -15,10 +15,16 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 
 		},
-		delete: function(){
-
-			//TODO
-
+		delete: function(taskID,commentID,onSuccess,onError){
+			var req = {
+		    method: 'DELETE',
+		    url: '/api/comment',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param({comment : commentID, task : taskID})
+			}
+			$http(req).then(onSuccess, onError);
 		},
 		get:function(obj, onSuccess, onError){
 		  //get tasks for specific project

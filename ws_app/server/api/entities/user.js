@@ -8,7 +8,31 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 
 /*Returns collection of users that word on project with this id*/ 
-router.get('/project/:id',function (req,res,next){
+router
+.get('/project/iamin',function(req,res,next){
+   Project.find({},
+                function(err,entry){
+                    if(err){
+                            res.send({success:false, msg:'Error with datebase.'});
+                            return;
+                    }
+                    // console.log("projekti:");
+                    // console.log(entry);
+                    // console.log("user:");
+                    // console.log(req.session.user);
+                    //res.json({success:true, msg:"PROJECTS"})
+                    var projects = [];
+                    for(var i =0;i<entry.length;i++){
+                        for(var j = 0;j<entry[i].usersOnProject.length;j++){
+                            if(entry[i].usersOnProject[j]==req.session.user._id){
+                                projects.push(entry[i]);
+                            }
+                        }
+                    }
+                     res.json({success:true, msg:"PROJECTS",projectsImIn:projects});
+                 })
+})
+.get('/project/:id',function (req,res,next){
     Project.findOne({_id :req.params.id},
         function(err,doc){
             if(err){
@@ -16,8 +40,7 @@ router.get('/project/:id',function (req,res,next){
                  return;
             }
        }).populate('usersOnProject').exec(function(err, entry) {
-      // ako se desila greska predjemo na sledeci middleware (za rukovanje greskama)
-             if (err){
+            if (err){
                  res.send({success:false, msg:'Error, couldnt populate with users.'});
                  return;
             }
@@ -49,10 +72,32 @@ router.get('/project/:id',function (req,res,next){
         res.send({success:false, msg:'Update user failed.'});
                             return;           
     };
-        res.json({success:true,msg:"USERS",entered:entry});
+        res.json({success:true,msg:"USER SUCCESSFULLY ADDED TO PROJECT"});
+        
       });
     
     });
+}).delete('/',function(req,res,next){
+    Project.findOne({"_id":req.body.project},function (err, entry) {
+    if(err){ 
+        res.send({success:false, msg:'Project does not exist.'});
+                            return;
+    }
+      var index = entry.usersOnProject.indexOf(req.body.user._id);
+     if (index > -1) {
+                entry.usersOnProject.splice(index, 1);
+     }
+      Project.findByIdAndUpdate(entry._id, {"usersOnProject":entry.usersOnProject}, function (err, entry) {
+        if(err) {
+        res.send({success:false, msg:'Update user failed.'});
+                            return;           
+        };
+        res.json({success:true,msg:"USER SUCCESSFULLY ADDED TO PROJECT"});
+        
+      });
+    
+    });
+    
 })
 
 

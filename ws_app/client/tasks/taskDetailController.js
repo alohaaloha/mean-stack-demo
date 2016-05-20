@@ -57,24 +57,43 @@ angular.module('wsapp')
             function(response){
             }
         );
+        
+       
     }
+    
+     $scope.deleteTaskFromProject =  function(taskObj){
+             
+              
+               taskService.delete(taskObj,function(response){
+                   //edittask({id:task._id})
+                  if(response.data.success){
+                   $state.go('projectdetail',{id:response.data.project});
+                   console.log(response.data);
+                  }
+                    //
+               },function(response){
+                   
+               });
+            
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     $scope.deleteComment= function(taskID,comment){
+            commentService.delete(taskID,comment._id,function(response){
+                 if(response.data.success){
+                          console.log("Deleted comment!");
+                          //console.log(response.data);
+                          //$state.go('taskdetail',{id:taskID});
+                          var index = $scope.task.comments.indexOf(comment);
+                          if (index > -1) {
+                               $scope.task.comments.splice(index, 1);
+                          }
+                          
+                          
+                  }
+            },function(response){
+                 $state.go('home');
+            })
+     }
 
     });

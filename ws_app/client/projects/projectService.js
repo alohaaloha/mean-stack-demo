@@ -15,10 +15,16 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 		
 		},
-		delete: function(){
-
-			//TODO
-
+		delete: function(project,onSuccess,onError){
+			var req = {
+		    method: 'DELETE',
+		    url: '/api/project',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param(project)
+			}
+			$http(req).then(onSuccess, onError);
 		}, 
 		get:function(onSuccess, onError){
 
@@ -65,6 +71,32 @@ angular.module('wsapp')
 		    data: $.param({project : projectID, user :userID})
 			}
 			$http(req).then(onSuccess, onError);
+		},
+		removeUserFromProjectController: function(projectID,userID,onSuccess,onError){
+			var req = {
+		    method: 'DELETE',
+		    url: '/api/user',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data: $.param({project : projectID, user :userID})
+			}
+			$http(req).then(onSuccess, onError);
+			
+		},
+		getAllProjectWhereIam :function(onSuccess,onError){
+			///project/iamin/:id
+			var req = {
+		    method: 'GET',
+		    url: '/api/user/project/iamin',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    }
+			}
+			$http(req).then(onSuccess, onError);
+			
+		
 		}
+		
 	}
 });

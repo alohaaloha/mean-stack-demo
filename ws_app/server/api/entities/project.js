@@ -75,26 +75,20 @@ router
             });
       }
 
-  }).post('/',function(req,res,next){
-    Project.find({_id :req.body.project}, function(err,doc){
-       if(err){
-           res.send({success:false, msg:'Error with datebase.'});
-                 return;
-       }
-       console.log("PROJEKAT NA KOJI DODAJEM USER-a"+doc);
-       console.log("User kojeg dodajem:",req.body.user);
-        
-    });
-    
-}).put('/:id', function(req, res, next) {
+  })
+  .put('/:id', function(req, res, next) {
 
     //todo
 
   })
-  .delete('/:id', function(req, res, next) {
-
-    //TODO
-
+  .delete('/', function(req, res, next) {
+         
+         Project.remove({"_id":req.body._id},function (err, successIndicator) {
+                    if(err) next(err);
+                                        
+                     res.json({success: true, msg: 'Successful deleted!'});
+                    
+               });
   });
 
 

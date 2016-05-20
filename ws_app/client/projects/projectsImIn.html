@@ -17,12 +17,12 @@
             </thead>
             <tbody>
             <tr ng-repeat="model in collection">
-	                <td>{{model.name}}</td>
-	                <td>{{model.name}}</td>
-	                <td>{{model.name}}</td>                               
+	                <td>{{model.title}}</td>
+	                <td>{{model.createdAt}}</td>
+	                <td>{{model.deadline}}</td>                               
 		            <td>			            
-			           <button type="submit"      
-                                ui-sref="home"
+			           <button type="submit"
+                                ui-sref="projectdetail({id:model._id})"
                                 class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>OPEN PROJECT</span>
                         </button>

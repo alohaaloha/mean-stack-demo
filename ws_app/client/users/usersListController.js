@@ -34,7 +34,9 @@ userService.getAll(function(response){
                                        
                                         }else{
                                             //console.log(response.data);
-                                            $scope.collection = response.data.users;   
+                                            $scope.collection = response.data.users;
+                                            
+                                               
                                         }
                                      },
                                      function(response){
@@ -43,7 +45,14 @@ userService.getAll(function(response){
                                      );
 
     $scope.addUserToProjectController = function (user){
-        
+            
+            for(var i = 0;i<$scope.collectionUsersOnProject.length;i++){
+                if($scope.collectionUsersOnProject[i]._id == user._id){
+                   alertify.error("USER ALREADY EXIST IN PROJECT!");
+                   return; 
+                }
+            }
+            
             projectService.addUserToProject($stateParams.id,user,
                                      function(response){
                                         if(!response.data.success){
@@ -52,18 +61,48 @@ userService.getAll(function(response){
                                            console.log(response.data);    
                                     }else{
                                             console.log("2");
-                                            console.log(response.data);
+                                            alertify.success("ADDED USER TO PROJECT!");
+                                            $scope.collectionUsersOnProject.push(user);
                                             
-                                           // $scope.collection = response.data.users;   
+                                            
                                         }
                                      },
                                      function(response){
-                                            console.log("3");
-                                            console.log(response.data); 
+                                          
                                             $state.go('home');
-                                            
+                                            console.log("1");
+                                            console.log(response.data); 
                                     } 
             );
+    }
+    
+    $scope.removeUserFromProjectController = function(user){
+            projectService.removeUserFromProjectController($stateParams.id,user,
+                                     function(response){
+                                        if(!response.data.success){
+                                           $state.go('home');
+                                           console.log("1");
+                                           console.log(response.data);    
+                                    }else{
+                                            console.log("2");
+                                            alertify.success("REMOVED USER FROM PROJECT!");
+                                            //$scope.collection.push(user);
+                                            var index = $scope.collectionUsersOnProject.indexOf(user);
+                                            //$scope.collection.remove(index);
+                                            if (index > -1) {
+                                                    $scope.collectionUsersOnProject.splice(index, 1);
+                                            }
+                                            
+                                        }
+                                     },
+                                     function(response){
+                                          
+                                            $state.go('home');
+                                            console.log("1");
+                                            console.log(response.data); 
+                                    } 
+            );
+        
     }
 
     });

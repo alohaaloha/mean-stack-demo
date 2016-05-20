@@ -22,7 +22,7 @@
             <span class="glyphicon glyphicon-pencil"></span>
             EDIT TASK
         </button>
-        <button class="btn btn-danger" type="button" ui-sref="taskdetail({id:task._id})">
+        <button class="btn btn-danger" type="button" ng-click="deleteTaskFromProject(task)">
             <span class="glyphicon glyphicon-trash"></span>
             DELETE TASK
         </button>
@@ -60,13 +60,13 @@
                 <td>{{model.creator.username}}</td>
                 <td>{{model.updatedAt}}</td>
                 <td>
-                    <button type="submit"
+                    <button 
                             ui-sref="home"
                             class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>EDIT</span>
                     </button>
-                    <button type="submit"
-                            ui-sref="home"
+                    <button 
+                            ng-click="deleteComment(task._id,model)"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>DELETE</span>
                     </button>
