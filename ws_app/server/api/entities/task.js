@@ -79,6 +79,7 @@ router
           //VIDETI KOMENTARISANO DODAVANJE NOVOG 'COMMENT' - ista stvar
           var pID=req.body.project;
           var body=req.body;
+          body.updater=req.session.user.username; //init updater
           delete body.project;
           body.creator=req.session.user._id;
           var task = new Task(body);
