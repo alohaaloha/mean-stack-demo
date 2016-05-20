@@ -77,7 +77,19 @@ angular.module('wsapp')
 			}
 			$http(req).then(onSuccess, onError);
 			
+		},
+		getAllProjectWhereIam :function(onSuccess,onError){
+			///project/iamin/:id
+			var req = {
+		    method: 'GET',
+		    url: '/api/user/project/iamin',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    }
+			}
+			$http(req).then(onSuccess, onError);
 		}
+		
 		
 	}
 });

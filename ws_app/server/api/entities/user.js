@@ -8,7 +8,31 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 
 /*Returns collection of users that word on project with this id*/ 
-router.get('/project/:id',function (req,res,next){
+router
+.get('/project/iamin',function(req,res,next){
+   Project.find({},
+                function(err,entry){
+                    if(err){
+                            res.send({success:false, msg:'Error with datebase.'});
+                            return;
+                    }
+                    // console.log("projekti:");
+                    // console.log(entry);
+                    // console.log("user:");
+                    // console.log(req.session.user);
+                    //res.json({success:true, msg:"PROJECTS"})
+                    var projects = [];
+                    for(var i =0;i<entry.length;i++){
+                        for(var j = 0;j<entry[i].usersOnProject.length;j++){
+                            if(entry[i].usersOnProject[j]==req.session.user._id){
+                                projects.push(entry[i]);
+                            }
+                        }
+                    }
+                     res.json({success:true, msg:"PROJECTS",projectsImIn:projects});
+                 })
+})
+.get('/project/:id',function (req,res,next){
     Project.findOne({_id :req.params.id},
         function(err,doc){
             if(err){

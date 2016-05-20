@@ -17,7 +17,7 @@ angular.module('wsapp')
                 }
             })
         .state('projectsimin', {
-                url: '/projectsimin',
+                url: '/projectsimin/{id}',
                 views: {
                     'content': {
                         templateUrl: 'projects/projectsImIn.html',
