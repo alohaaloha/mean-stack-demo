@@ -2,7 +2,7 @@
 
 angular.module('wsapp')
     .controller('TaskDetailController', function ($scope, $state, authService, projectService, taskService, $stateParams, commentService) {
-
+            
     authService.authenticate(
                             function(response){
                                 if(!response.data.success)
@@ -27,8 +27,9 @@ angular.module('wsapp')
      );
 
 
-
+    $scope.IsVisible = false;
     $scope.comment={};
+    $scope.changedComment = {};
     //creator se popuni na serverskoj strani
     //text se popuni sa inputa
     //task popunim dole, da ne bi bilo undefined odma
@@ -95,5 +96,26 @@ angular.module('wsapp')
                  $state.go('home');
             })
      }
-
+     
+     
+     $scope.editComment = function(taskID,commentObject){
+        
+            $scope.IsVisible = true;    
+            $scope.changedComment=commentObject;
+            
+            
+     }
+     $scope.changeComment = function(commentObj){
+         commentService.updateComment(commentObj, function(response) {
+                //alertify
+                if(response.data.success){
+                     alertify.success("Successfully changed comment.");
+                     $scope.IsVisible = false;  
+                }
+                      
+            }, function(response){
+                 $state.go('home');
+            })
+         
+     }
     });

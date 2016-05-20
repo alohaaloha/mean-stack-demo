@@ -55,7 +55,7 @@
                 <td>{{model.updatedAt}}</td>
                 <td>
                     <button
-                            ui-sref="home"
+                            ng-click="editComment(task._id,model)"
                             class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>EDIT</span>
                     </button>
@@ -76,11 +76,21 @@
     <div class="col-md-4 col-md-offset-4">
         <div class="input-group">
             <input type="text" ng-model="comment.text" class="form-control" placeholder="Type comment...">
-      <span class="input-group-btn">
-        <button class="btn btn-success" type="button" ng-click="addComment()">ADD COMMENT</button>
-      </span>
+            <span class="input-group-btn">
+            <button class="btn btn-success" type="button" ng-click="addComment()">ADD COMMENT</button>
+            </span>
         </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
+    <!--Place for changing comment-->
+    <div ng-show = "IsVisible">
+        <div class="input-group">
+            <input type="text" ng-model="changedComment.text" class="form-control" placeholder="Type comment...">
+            <span class="input-group-btn">
+            <button class="btn btn-success" type="button" ng-click="changeComment(changedComment)">CHANGE COMMENT</button>
+            </span>
+        </div>
+    </div>
+    
 
 
 <br><br><br>

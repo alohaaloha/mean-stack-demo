@@ -7,7 +7,7 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 var Comment = require(__dirname+'/../../../models/comment'); // get the mongoose model
 var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 
-/*API for entity A*/
+/*API for entity A */
 router
   .get('/:id', function(req, res, next) {
     /*GET COMMENT WITH ID*/
@@ -22,7 +22,17 @@ router
               });
 
   })
-  .post('/task', function(req, res) {
+  .post('/update', function(req, res) {
+   ///api/comment/update
+    Comment.findByIdAndUpdate(req.body.comment._id, {"text":req.body.comment.text}, function (err, entry) {
+                    if(err) next(err);
+                    //res.json(entry);
+                    //samo zbog return
+                    
+                    res.json({success: true, msg: 'Successful changed'});
+                  });
+
+  }).post('/task', function(req, res) {
     /*GET COMMENTS FOR TASK ID*/
     //dobija se kad se get sam task - komentari idu uz task kome pripadaju
 

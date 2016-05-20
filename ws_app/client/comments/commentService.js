@@ -53,15 +53,15 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 
 		},
-		update:function(projectID, onSuccess, onError){
-
+		updateComment:function(commentObj, onSuccess, onError){
 
          var req = {
-		    method: 'GET',
-		    url: '/api/project/'+projectID,
+		    method: 'POST',
+		    url: '/api/comment/update',
 		    headers: {
 		        'Content-Type': 'application/x-www-form-urlencoded'
-		    }
+		    },
+			data: $.param({comment:commentObj})
 		    }
 
 		$http(req).then(onSuccess, onError);
