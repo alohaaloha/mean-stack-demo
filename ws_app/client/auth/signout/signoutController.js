@@ -8,7 +8,8 @@ angular.module('wsapp')
 
 		   authService.signout(
 			   function(response){
-				   console.log(response.data.msg);	
+				   console.log(response.data.msg);
+				   	$state.go('home');
 			   }
 			   ,function(response){
 					console.log(response.data.msg);

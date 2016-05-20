@@ -134,8 +134,6 @@ router
 
               delete req.body.comments;
               delete req.body.taskHistory;
-              
-
               console.log('BODY:');
               console.log(req.body);
                 Task.findByIdAndUpdate(
@@ -148,7 +146,8 @@ router
                   'priority':req.body.priority,
                   'deadline': req.body.deadline,
                   'createdAt': req.body.createdAt,
-                  'updatedAt': req.body.updatedAt
+                  'updatedAt': req.body.updatedAt,
+                  'updater':req.session.user.username
                   },
                   function (err, entryT) {
                   if(err) next(err);
@@ -163,40 +162,40 @@ router
   })
   .delete('/', function(req, res, next) {
                 console.log(req.body._id);
-                
+
                 Task.remove({"_id":req.body._id},function (err, successIndicator) {
                     if(err) next(err);
-                                        
+
                     Project.find({},function(err,entry){
                             if(err)next(err);
-                            
-                            var idetificator; 
+
+                            var idetificator;
                             var changedList;
                             for(var i =0;i<entry.length;i++){
                                 var index = entry[i].tasks.indexOf(req.body._id);
                                 if (index > -1) {
                                     entry[i].tasks.splice(index, 1);
-                                    idetificator = entry[i]._id; 
+                                    idetificator = entry[i]._id;
                                     changedList = entry[i].tasks;
                                     break;
                                 }
                             }
-                            
-                            
+
+
                             Project.findByIdAndUpdate(idetificator, {"tasks":changedList}, function (err, entry1) {
                                       if(err) next(err);
                                                   //res.json(entry);
                                         res.json({success: true, msg: 'Successful deleted!', project:entry1._id});
                             });
-                            
-                            
-                            
+
+
+
 
                     })
-                    
-                     
+
+
                });
-           
+
 
   });
 

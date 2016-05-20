@@ -1,0 +1,44 @@
+<div >
+
+    <div class="alert alert-success" role="alert">
+        TITLE: <h4>{{task.title}}</h4>
+        CREATED: <h4>{{task.createdAt}}</h4>
+        LAST UPDATE: <h4>{{task.updatedAt}}</h4>
+        STATUS: <h4>{{task.status}}</h4>
+        PRIORITY: <h4>{{task.priority}}</h4>
+    </div>
+
+
+    <!--LIST-->
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>WHEN</th>
+                <th>WHO</th>
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>STATUS</th>
+                <th>PRIORITY</th>
+                <th>DEADLINE</th>
+                <th>CREATED</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in task.taskHistory | orderBy:'-'">
+                <td>{{model.updatedAt}}</td>
+                <td>{{model.updater}}</td>
+                <td>{{model.title}}</td>
+                <td>{{model.description}}</td>
+                <td>{{model.status}}</td>
+                <td>{{model.priority}}</td>
+                <td>{{model.deadline}}</td>
+                <td>{{model.createdAt}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

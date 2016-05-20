@@ -42,6 +42,19 @@ angular.module('wsapp')
                                     }
                                 }
                         })
+        .state('taskhistory', {
+                                url: '/taskhistory/{id}',
+                                views: {
+                                    'content': {
+                                        templateUrl: 'tasks/taskHistory.html',
+                                        controller: 'TaskHistoryController'
+                                    },
+                                    'navbar':{
+                                        templateUrl: 'navbar/navbar.html',
+                                        //controller: 'WelcomeController'
+                                    }
+                                }
+                        })
         ;
 
 

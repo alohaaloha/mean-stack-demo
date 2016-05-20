@@ -1,16 +1,10 @@
     <div >
 
-
-        <div class="alert alert-success" role="alert">
-            <b>PROJECT INFO:</b> <br>
+        <div class="alert alert-info" role="alert">
             TITLE: <h4>{{project.title}}</h4>
-
             CREATED: <h4>{{project.createdAt}}</h4>
-
             DEADLINE: <h4>{{project.deadline}}</h4>
-
             LAST UPDATE: <h4>{{project.updatedAt}}</h4>
-
 
                 <button type="submit"
                         ui-sref="projectdetail({id:project._id})"
@@ -37,7 +31,7 @@
 
        <!--TASKS-->
 
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-info" role="alert">
             TASKS ON PROJECT:
             <span class="badge">
                 {{project.tasks.length}}

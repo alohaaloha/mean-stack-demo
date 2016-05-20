@@ -1,19 +1,13 @@
 <div >
 
     <div class="alert alert-success" role="alert">
-        <b>TASK INFO:</b> <br>
         TITLE: <h4>{{task.title}}</h4>
-
         CREATED: <h4>{{task.createdAt}}</h4>
-
         LAST UPDATE: <h4>{{task.updatedAt}}</h4>
-
         STATUS: <h4>{{task.status}}</h4>
-
         PRIORITY: <h4>{{task.priority}}</h4>
 
-
-        <button class="btn btn-default" type="button" ui-sref="taskdetail({id:task._id})">
+        <button class="btn btn-success" type="button" ui-sref="taskhistory({id:task._id})">
             <span class="glyphicon glyphicon-time"></span>
             TASK HISTORY
         </button>
@@ -60,12 +54,12 @@
                 <td>{{model.creator.username}}</td>
                 <td>{{model.updatedAt}}</td>
                 <td>
-                    <button 
+                    <button
                             ui-sref="home"
                             class="btn btn-warning btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>EDIT</span>
                     </button>
-                    <button 
+                    <button
                             ng-click="deleteComment(task._id,model)"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>DELETE</span>
