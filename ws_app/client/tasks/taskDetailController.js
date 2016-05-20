@@ -57,8 +57,25 @@ angular.module('wsapp')
             function(response){
             }
         );
+        
+       
     }
-
+    
+     $scope.deleteTaskFromProject =  function(taskObj){
+               console.log("IDDDDDDDDDDDDDDDDDD:")
+               console.log(taskObj);
+               taskService.delete(taskObj,function(response){
+                   //edittask({id:task._id})
+                  if(response.data.success){
+                   $state.go('projectdetail',{id:response.data.project});
+                   console.log(response.data);
+                  }
+                    //
+               },function(response){
+                   
+               });
+            
+        }
 
 
 
