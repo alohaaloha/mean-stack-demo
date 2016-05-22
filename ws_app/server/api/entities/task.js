@@ -8,7 +8,20 @@ var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 var Comment = require(__dirname+'/../../../models/comment'); // get the mongoose model
 
 /*API for entity A*/
-router
+router.get('/user', function(req, res, next) {
+      User.findOne({_id:req.session.user._id},function(err,entry){
+           if (err) {
+              res.send({success:false, msg:'Error with database, cannot read user.'});
+              return;
+            }
+      }).populate('tasksImOn').exec(function(err, entry) {
+            if (err){
+                 res.send({success:false, msg:'Error, couldnt populate with tasks.'});
+                 return;
+            }
+             res.json({success:true, msg:"TASKS",data:entry});
+        });
+  })
   .get('/:id', function(req, res, next) {
     /*GET TASK WITH ID*/
 
@@ -33,8 +46,7 @@ router
                   res.json({success:true, msg:"TASK DATA WITH ALL CRAP", data:entry});
                 });
 
-  })
-  .post('/project/', function(req, res) {
+  }).post('/project/', function(req, res) {
 
     /*GET TASKS FOR PROJECT ID that belongs to logged user*/
     //TODO aaaaaaaaaaa

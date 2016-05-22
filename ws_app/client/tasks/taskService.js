@@ -79,10 +79,17 @@ angular.module('wsapp')
 		    },
 		    data:$.param(taskObj)
 		 }
+		 $http(req).then(onSuccess, onError);
 		},
 		getTasksForUser : function(onSuccess,onError){
-			
-			
+			var req = {
+		    method: 'GET',
+		    url: '/api/task/user',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    }
+		}
+		 $http(req).then(onSuccess, onError);
 		}
 	}
 });

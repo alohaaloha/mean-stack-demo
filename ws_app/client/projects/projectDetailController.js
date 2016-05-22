@@ -15,8 +15,11 @@ angular.module('wsapp')
       $scope.taskinfo='ALL TASKS';
       $scope.taskfilterByStatus='NO FILTER';
       $scope.taskfilterByPriority='NO FILTER';
-      $scope.tasks; // <---- OVDE DODAJ TASKOVE I SVE RADI NAD OVOM PROMENJIVOM - OVA IDE NA VIEW
-
+      
+      
+      //$scope.tasks; // <---- OVDE DODAJ TASKOVE I SVE RADI NAD OVOM PROMENJIVOM - OVA IDE NA VIEW 
+   
+      
       //F
       $scope.allTasks=function(){
 
@@ -39,19 +42,14 @@ angular.module('wsapp')
       $scope.myTasks=function(){
           $scope.taskinfo='MY TASKS';
 
-            //ne mora na server, samo iterira se kroz $state.project.tasks
-
-/*            taskService.get(
-                {$stateParams.id},
-                function(response){
-
-
-                },
-                function(response){
-
-
-                }
-            );*/
+        taskService.getTasksForUser(function (response) {
+                     if(!response.data.success)
+                                	$state.go('home');
+                     
+                     $scope.tasks = response.data.data.tasksImOn;
+      },function (response) {
+                     $state.go('home');  
+      }); 
 
 
       }
