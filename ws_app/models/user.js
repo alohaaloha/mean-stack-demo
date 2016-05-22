@@ -22,7 +22,11 @@ var userSchema = new Schema({
     unique: true
   },
   role:String,
-  createdAt: Date
+  createdAt: Date,
+  tasksImOn:[{
+       type: Schema.Types.ObjectId,
+       ref: 'Task'
+              }]
 });
 
 

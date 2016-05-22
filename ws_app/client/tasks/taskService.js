@@ -69,6 +69,20 @@ angular.module('wsapp')
 		$http(req).then(onSuccess, onError);
 
 
+		},
+		addTaskForUser : function(onSuccess,onError){
+			var req = {
+		    method: 'PUT',
+		    url: '/api/user/task',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    },
+		    data:$.param(taskObj)
+		 }
+		},
+		getTasksForUser : function(onSuccess,onError){
+			
+			
 		}
 	}
 });

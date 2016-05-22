@@ -1,0 +1,76 @@
+<div >
+
+    <div class="alert alert-success" role="alert">
+        TASK TITLE: <h4>{{task.title}}</h4>
+        CREATED: <h4>{{task.createdAt}}</h4>
+        LAST UPDATE: <h4>{{task.updatedAt}}</h4>
+        STATUS: <h4>{{task.status}}</h4>
+        PRIORITY: <h4>{{task.priority}}</h4>
+    </div>
+    
+     <h3>
+            USERS ON THIS TASK
+            <span class="badge">
+                {{collectionUsersOnTask.length}}
+            </span>
+        </h3>
+    
+    <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>USERNAME</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="model in collectionUsersOnTask">
+                    <td>{{model.username}}</td>
+                    
+                    <td>
+                        <button ng-click="removeUserFromTaskController(model)"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-minus"></span>&nbsp;<span>REMOVE</span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+     
+     <h3>
+        USER LIST
+        <span class="badge">
+                {{collection.length}}
+        </span>
+    </h3>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>USERNAME</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="model in collection">
+                <td>{{model.username}}</td>
+                <td>
+                    <button 
+                            class="btn btn-primary btn-sm"
+                            ng-click="addUserToTaskController(model)">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+<br><br><br>
+
+
+
+</div>
