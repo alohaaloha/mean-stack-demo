@@ -1,0 +1,27 @@
+'use strict';
+
+angular.module('wsapp')
+    .controller('DachboardController', function ($scope, $state, authService, projectService) {
+
+	authService.authenticate(
+                            function(response){
+                                if(!response.data.success)
+                                	$state.go('home');
+                            },
+                            function(response){
+                               $state.go('home');
+                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
