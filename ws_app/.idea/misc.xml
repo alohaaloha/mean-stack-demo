@@ -1,36 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Android Lint</id>
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-          <State>
-            <id>Performance issuesJava</id>
-          </State>
-          <State>
-            <id>Portability issuesJava</id>
-          </State>
-          <State>
-            <id>Resource management issuesJava</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>Android</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -41,7 +10,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="true" assert-keyword="true" jdk-15="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" assert-keyword="false" jdk-15="false" />
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">

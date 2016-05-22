@@ -3,6 +3,6 @@
 angular.module('wsapp')
     .controller('WelcomeController', function ($scope, $state) {
 
-	$scope.bla="test"
+	$scope.bla="test";
 
     });

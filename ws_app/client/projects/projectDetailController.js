@@ -12,10 +12,14 @@ angular.module('wsapp')
                                $state.go('home');
                             });
 
+      $scope.taskinfo='ALL TASKS';
+      $scope.taskfilterByStatus='NO FILTER';
+      $scope.taskfilterByPriority='NO FILTER';
+      $scope.tasks; // <---- OVDE DODAJ TASKOVE I SVE RADI NAD OVOM PROMENJIVOM - OVA IDE NA VIEW
 
-
+      //F
       $scope.allTasks=function(){
-          $scope.taskinfo='ALL TASKS';
+
           projectService.getById(
                                   $stateParams.id,
                                   function(response){
@@ -24,15 +28,18 @@ angular.module('wsapp')
                                       }else{
                                           console.log(response.data);
                                           $scope.project=response.data.data;
+                                          $scope.tasks=$scope.project.tasks;
                                       }
                                   },
                                   function(response){
                                      $state.go('home');
                                   });
       }
-
+      //F
       $scope.myTasks=function(){
           $scope.taskinfo='MY TASKS';
+
+            //ne mora na server, samo iterira se kroz $state.project.tasks
 
 /*            taskService.get(
                 {$stateParams.id},
@@ -49,11 +56,10 @@ angular.module('wsapp')
 
       }
 
-
-
-      //inicijalno prikazuje sve taskove
+      //CALL ME BABY : CALLING ALL TASKS [INIT]
       $scope.allTasks();
 
+      //F
       $scope.deleteProject = function(project){
           console.log("PROJEKAT KOJI SE BRISE")
           console.log(project);
@@ -70,6 +76,46 @@ angular.module('wsapp')
           })
           
       }
-        
+
+      //F
+      $scope.filterByStatus=function(param){
+        $scope.taskfilterByStatus=param;
+        srcuj();
+      }
+
+      //F
+      $scope.filterByPriority=function(param){
+        $scope.taskfilterByPriority=param;
+        srcuj();
+      }
+
+
+       var srcuj=function(){
+            $scope.tasks=[];
+            for(var i=0; i<$scope.project.tasks.length; i++){
+                if($scope.project.tasks[i].status===$scope.taskfilterByStatus || $scope.project.tasks[i].priority===$scope.taskfilterByPriority){
+                    $scope.tasks.push($scope.project.tasks[i]);
+                }
+            }
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     });
