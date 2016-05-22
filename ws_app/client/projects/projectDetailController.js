@@ -91,12 +91,35 @@ angular.module('wsapp')
 
 
        var srcuj=function(){
+
             $scope.tasks=[];
-            for(var i=0; i<$scope.project.tasks.length; i++){
-                if($scope.project.tasks[i].status===$scope.taskfilterByStatus || $scope.project.tasks[i].priority===$scope.taskfilterByPriority){
-                    $scope.tasks.push($scope.project.tasks[i]);
+                if($scope.taskfilterByPriority==='NO FILTER' && $scope.taskfilterByStatus==='NO FILTER'){
+                $scope.tasks=$scope.project.tasks;
+                }else
+                if($scope.taskfilterByPriority==='NO FILTER'){
+                    for(var i=0; i<$scope.project.tasks.length; i++){
+
+                        if($scope.project.tasks[i].status===$scope.taskfilterByStatus){
+                                                               $scope.tasks.push($scope.project.tasks[i]);
+                         }
+
+                    }
+                }else
+                if($scope.taskfilterByStatus==='NO FILTER'){
+                        for(var i=0; i<$scope.project.tasks.length; i++){
+
+                            if($scope.project.tasks[i].priority===$scope.taskfilterByPriority){
+                                                                   $scope.tasks.push($scope.project.tasks[i]);
+                             }
+
+                         }
+                }else{
+                    for(var i=0; i<$scope.project.tasks.length; i++){
+                        if($scope.project.tasks[i].status===$scope.taskfilterByStatus || $scope.project.tasks[i].priority===$scope.taskfilterByPriority){
+                                           $scope.tasks.push($scope.project.tasks[i]);
+                         }
+                     }
                 }
-            }
        }
 
 

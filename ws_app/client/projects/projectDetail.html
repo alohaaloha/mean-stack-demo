@@ -54,9 +54,21 @@
 
             <br>
             <br>
+
+            FILTER BY STATUS: {{taskfilterByStatus}}
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-click="filterByStatus('NO FILTER')">NO FILTER</button>
+                <button type="button" class="btn btn-default" ng-click="filterByStatus('TO DO')">TO DO</button>
+                <button type="button" class="btn btn-default" ng-click="filterByStatus('IN PROGRESS')">IN PROGRESS</button>
+                <button type="button" class="btn btn-default" ng-click="filterByStatus('VERIFY')">VERIFY</button>
+                <button type="button" class="btn btn-default" ng-click="filterByStatus('DONE')">DONE</button>
+            </div>
+
+            <br>
+            <br>
             FILTER BY PRIORITY: {{taskfilterByPriority}}
             <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default" ng-click="filterByPriority('')">NO FILTER</button>
+                <button type="button" class="btn btn-default" ng-click="filterByPriority('NO FILTER')">NO FILTER</button>
                 <button type="button" class="btn btn-default" ng-click="filterByPriority('BLOCKER')">BLOCKER</button>
                 <button type="button" class="btn btn-default" ng-click="filterByPriority('CRITICAL')">CRITICAL</button>
                 <button type="button" class="btn btn-default" ng-click="filterByPriority('MAJOR')">MAJOR</button>
@@ -65,16 +77,6 @@
 
             </div>
 
-            <br>
-            <br>
-            FILTER BY STATUS: {{taskfilterByStatus}}
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default" ng-click="filterByStatus('')">NO FILTER</button>
-                <button type="button" class="btn btn-default" ng-click="filterByStatus('TO DO')">TO DO</button>
-                <button type="button" class="btn btn-default" ng-click="filterByStatus('IN PROGRESS')">IN PROGRESS</button>
-                <button type="button" class="btn btn-default" ng-click="filterByStatus('VERIFY')">VERIFY</button>
-                <button type="button" class="btn btn-default" ng-click="filterByStatus('DONE')">DONE</button>
-            </div>
 
         </div>
 
