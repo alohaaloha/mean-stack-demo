@@ -46,6 +46,23 @@ router
             }
              res.json({success:true, msg:"USERS",data:entry});
         });
+}).get('/task/:id',function (req,res,next){
+    User.find({},
+        function(err,doc){
+            if(err){
+                 res.send({success:false, msg:'Error with datebase, couldnt find TASK.'});
+                 return;
+            }
+            var collectionUsersOnThisTask = [];
+            for(var i =0;i<doc.length;i++){
+                        for(var j = 0;j<doc[i].tasksImOn.length;j++){
+                            if(doc[i].tasksImOn[j]==req.params.id){
+                                collectionUsersOnThisTask.push(doc[i]);
+                            }
+                        }
+                    }
+             res.json({success:true, msg:"USERSONTASK",collectionUsersOnTask:collectionUsersOnThisTask});
+       });
 }).get('/',function(req,res,next){
      User.find({},
                 function(err,doc){
@@ -77,7 +94,26 @@ router
       });
     
     });
-}).delete('/',function(req,res,next){
+}).post('/task',function(req,res,next){
+    
+     
+    User.findOne({"_id":req.body.user},function (err, entry) {
+    if(err){ 
+        res.send({success:false, msg:'User does not exist.'});
+                            return;
+    }
+      User.findByIdAndUpdate(entry._id, {$push:{"tasksImOn":req.body.task}}, function (err, entry) {
+        if(err) {
+        res.send({success:false, msg:'Update user failed.'});
+                            return;           
+    };
+        res.json({success:true,msg:"USER SUCCESSFULLY ADDED TO TASK"});
+        
+      });
+    
+    });
+})
+.delete('/',function(req,res,next){
     Project.findOne({"_id":req.body.project},function (err, entry) {
     if(err){ 
         res.send({success:false, msg:'Project does not exist.'});
@@ -98,6 +134,30 @@ router
     
     });
     
+}).delete('/task',function(req,res,next){
+    
+ 
+    User.findOne({"_id":req.body.user},function (err, entry) {
+    if(err){ 
+        res.send({success:false, msg:'User does not exist on session.'});
+                            return;
+    }
+      var index = entry.tasksImOn.indexOf(req.body.task);
+     if (index > -1) {
+                entry.tasksImOn.splice(index, 1);
+     }
+     
+      User.findByIdAndUpdate(entry._id, {"tasksImOn":entry.tasksImOn}, function (err, entry) {
+        if(err) {
+        res.send({success:false, msg:'Update user failed.'});
+                            return;           
+        };
+        
+        res.json({success:true,msg:"USER SUCCESSFULLY REMOVED FROM TASK"});
+        
+      });
+    
+    });
 })
 
 
