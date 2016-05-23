@@ -25,13 +25,18 @@ taskService.getById(
                        
             }
      );
-userService.getAll(function(response){
+userService.getAllUsersCapableForAdingTasks($stateParams.id,function(response){
+                                        console.log("ID OD TASKA")
+                                        console.log($stateParams.id);
+                                        console.log($stateParams.id);
+                                        console.log($stateParams.id);
                                         if(!response.data.success){
                                            $state.go('home');
                                        
                                         }else{
-                                            //console.log(response.data);
-                                            $scope.collection = response.data.users;
+                                            console.log("STIGAOO ODGOVOR SA USERIMA SPOSOBNIM ZA TASKOVE!")
+                                            console.log(response.data);
+                                            $scope.collection = response.data.data.usersOnProject;
                                             
                                                
                                         }

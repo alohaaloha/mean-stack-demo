@@ -30,6 +30,16 @@ angular.module('wsapp')
 			}
 			$http(req).then(onSuccess, onError);
 		},
+		getAllUsersCapableForAdingTasks:function(taskID,onSuccess,onError){
+			var req = {
+		    method: 'GET',
+		    url: '/api/user/project/task/'+taskID,
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    		 }
+			}
+			$http(req).then(onSuccess, onError);
+		},
 		getById:function( onSuccess, onError){
 
 
