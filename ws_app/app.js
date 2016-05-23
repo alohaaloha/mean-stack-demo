@@ -54,7 +54,9 @@ app.use('/api/comment', comment);
 /* user api*/
 var user = require('./server/api/entities/user')
 app.use('/api/user/',user);
-
+/* dashboard api*/
+var dashboard = require('./server/api/dashboard/dashboard')
+app.use('/api/dashboard/',dashboard);
 
 
 /* start server */
