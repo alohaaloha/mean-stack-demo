@@ -7,10 +7,10 @@ var Project = require(__dirname+'/../../../models/project'); // get the mongoose
 var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 
-/*Returns list of pair {username: username, numberOfTasks: numberOfTasks}*/ 
+/*Returns list of pair {username: username, numberOfTasks: numberOfTasks}*/
 router
 .get('/:id',function(req,res,next){
-  
+
     Project.findOne(
             { _id: req.params.id }
             ,
@@ -20,7 +20,7 @@ router
                 return;
               }
               // for(var i =0;i<doc.usersOnProject.length;i++){
-                      
+
               // }
                //res.json({success:true, msg:"PROJECT DATA ", data:doc});
 
@@ -30,9 +30,9 @@ router
                  return;
             }
             //  res.json({success:true, msg:"TASKS",data:entry});
-            
+
             //res.json({success:true, msg:"PROJECT WITH USERS ON TASK",data:entry});
-            
+
                 for(var i =0;i<entry.usersOnProject.length;i++){
                        entry.usersOnProject[i].brojPojavljivanjaTaskova = 0;
                            for(var j = 0;j<entry.usersOnProject[i].tasksImOn.length;j++){
@@ -46,21 +46,21 @@ router
                                              console.log("POJAVIO SE!");
                                              console.log(entry.usersOnProject[i].brojPojavljivanjaTaskova);
                                       }
-                                }                    
+                                }
                            }
                 }
-                
+
                 var returList = [];
-                
-                for(var i =0;i<entry.usersOnProject.length;i++){  
-                    
+
+                for(var i =0;i<entry.usersOnProject.length;i++){
+
                     if(entry.usersOnProject[i].brojPojavljivanjaTaskova>0){
                             returList.push({ "username":entry.usersOnProject[i].username, "numberOfTasks":entry.usersOnProject[i].brojPojavljivanjaTaskova})
                     }
                 }
                 res.json({success:true, msg:"USER AND TASKSSSSSSSSSSSS",data:returList});
-        });     
-}).get('/finished/:id',function(req,res,next){  
+        });
+}).get('/finished/:id',function(req,res,next){
   /*Returns list of pair {username: username, numberOfDoneTasks: numberOfDoneTasks} and number of not finished tasks */
     Project.findOne(
             { _id: req.params.id }
@@ -70,14 +70,14 @@ router
                 res.send({success:false, msg:'U bazi sjeb'});
                 return;
               }
-              
+
 
             }).populate('usersOnProject').populate('tasks').exec(function(err, entry) {
             if (err){
                  res.send({success:false, msg:'Error, couldnt populate with tasks.'});
                  return;
             }
-            
+
                 var neuradjeniZadaci = 0;
                 for(var i =0;i<entry.usersOnProject.length;i++){
                        entry.usersOnProject[i].brojPojavljivanjaTaskova = 0;
@@ -93,32 +93,32 @@ router
                                             entry.usersOnProject[i].brojPojavljivanjaTaskova++;
                                              console.log("POJAVIO SE!");
                                              if(entry.tasks[k].status==="DONE"){
-                                                  
-                                                  entry.usersOnProject[i].brojUradjenihTaskova++;   
+
+                                                  entry.usersOnProject[i].brojUradjenihTaskova++;
                                              }else{
                                                   entry.usersOnProject[i].brojNeuradjenihTaskova++;
                                                   neuradjeniZadaci++;
                                              }
                                       }
-                                }                    
+                                }
                            }
                 }
-                
+
                 var returList = [];
-                
-                for(var i =0;i<entry.usersOnProject.length;i++){  
-                    
+
+                for(var i =0;i<entry.usersOnProject.length;i++){
+
                     if(entry.usersOnProject[i].brojPojavljivanjaTaskova>0){
-                      
-                      if(entry.usersOnProject[i].brojUradjenihTaskova>0){
+
+                      //if(entry.usersOnProject[i].brojUradjenihTaskova>0){
                             returList.push({ "username":entry.usersOnProject[i].username, "numberOfDoneTasks": entry.usersOnProject[i].brojUradjenihTaskova})
-                      }
-                        
+                      //}
+
                     }
                 }
                 var returnJSON = {list:returList,"notFinishedTasks":neuradjeniZadaci};
                 res.json({success:true, msg:"USER AND TASKSSSSSSSSSSSS",data:returnJSON});
-        });     
+        });
 })
 
  module.exports = router;

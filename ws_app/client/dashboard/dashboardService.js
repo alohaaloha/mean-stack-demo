@@ -15,14 +15,16 @@ angular.module('wsapp')
 
 		},
 		finishedTasksPerUser: function(proID,onSuccess,onError){
-			var req = {
-		    method: 'GET',
-		    url: '/api/dashboard/'+proID,
-		    headers: {
-		        'Content-Type': 'application/x-www-form-urlencoded'
-		    }
-			}
-			$http(req).then(onSuccess, onError);
+
+					var req = {
+					    method: 'GET',
+					    url: '/api/dashboard/finished/'+proID,
+					    headers: {
+					        'Content-Type': 'application/x-www-form-urlencoded'
+					    }
+					}
+
+					$http(req).then(onSuccess, onError);
 		}
 
 	}

@@ -13,7 +13,8 @@ angular.module('wsapp')
                             });
 
 //http://angular-google-chart.github.io/angular-google-chart/docs/0.1.0/examples/
-//------------------------------------------------------------------------------
+
+// TASKS PER USER --------------------------------------------------------------
 $scope.myChartObject = {};
 $scope.myChartObject.type = "PieChart";
 $scope.myChartObject.options = {
@@ -42,7 +43,7 @@ dashboardService.tasksPerUser(
   function(res){
 
   });
-//------------------------------------------------------------------------------
+//FINISHED TASKS PER USER-------------------------------------------------------
 $scope.myChartObject2 = {};
 $scope.myChartObject2.type = "PieChart";
 $scope.myChartObject2.options = {
@@ -58,15 +59,20 @@ $scope.myChartObject2.data = {
 dashboardService.finishedTasksPerUser(
   $stateParams.id,
   function(res){
-    //console.log("stigo jej");
-    //console.log(res.data);
-    for(var i=0;i<res.data.data.length;i++){
+    console.log("stigo jej2");
+    console.log(res.data);
+    for(var i=0;i<res.data.data.list.length;i++){
       var o1={c:[]};
-      var o2={v:res.data.data[i].username};
-      var o3={v:res.data.data[i].numberOfTasks};
+      var o2={v:res.data.data.list[i].username};
+      var o3={v:res.data.data.list[i].numberOfDoneTasks};
       o1.c.push(o2); o1.c.push(o3);
       $scope.myChartObject2.data.rows.push(o1);
     }
+    var o1={c:[]};
+    var o2={v:'NOT FINISHED'};
+    var o3={v:res.data.data.notFinishedTasks};
+    o1.c.push(o2); o1.c.push(o3);
+    $scope.myChartObject2.data.rows.push(o1);
   },
   function(res){
 
@@ -78,7 +84,7 @@ dashboardService.finishedTasksPerUser(
 
 
 
-/*
+/*  EXAMPLE OF DATA FOR GRAPH - DO NOT DELETE
 var t1={c:[]};
 var t2={};
 t1.c.push()
@@ -100,15 +106,6 @@ $scope.myChartObject.data.rows=[
       {v: 2},
   ]}];
 */
-
-
-
-
-
-
-
-
-
 
 
     });
