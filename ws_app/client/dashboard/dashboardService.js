@@ -1,28 +1,26 @@
 angular.module('wsapp')
 .service('dashboardService', function($http){
 	return{
-		tasksPerUser: function(projectObj, onSuccess, onError){
+		tasksPerUser: function(proID, onSuccess, onError){
 
 		var req = {
-		    method: 'POST',
-		    url: '/api/project',
+		    method: 'GET',
+		    url: '/api/dashboard/'+proID,
 		    headers: {
 		        'Content-Type': 'application/x-www-form-urlencoded'
-		    },
-		    data: $.param(projectObj)
+		    }
 		}
 
 		$http(req).then(onSuccess, onError);
 
 		},
-		finishedTasksPerUser: function(project,onSuccess,onError){
+		finishedTasksPerUser: function(proID,onSuccess,onError){
 			var req = {
-		    method: 'DELETE',
-		    url: '/api/project',
+		    method: 'GET',
+		    url: '/api/dashboard/'+proID,
 		    headers: {
 		        'Content-Type': 'application/x-www-form-urlencoded'
-		    },
-		    data: $.param(project)
+		    }
 			}
 			$http(req).then(onSuccess, onError);
 		}
