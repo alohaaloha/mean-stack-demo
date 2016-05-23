@@ -9,6 +9,7 @@
   "author": "RM, NP, MM, BC",
   "license": "ISC",
   "dependencies": {
+    "angular-google-chart": "^0.1.0",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "client-sessions": "^0.7.0",

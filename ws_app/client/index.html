@@ -2,6 +2,10 @@
   <head>
    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet"
+            href="bower_components/chartist/dist/chartist.min.css">
+      <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+
   </head>
   <body ng-app="wsapp">
 
@@ -16,6 +20,7 @@
     </div>
 
         <!-- LOAD ALL - angular & stuff -->
+
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-aria/angular-aria.js"></script>
@@ -31,6 +36,9 @@
         <script src="bower_components/json3/lib/json3.js"></script>
         <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
         <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/chartist/dist/chartist.min.js"></script>
+
+    <script src="bower_components/angular-google-chart/ng-google-chart.min.js"></script>
 
         <!-- ALERTIFY -->
         <!-- JavaScript -->
@@ -80,8 +88,9 @@
         <script src="usersontask/userontask.js"></script>
         <script src="usersontask/userontaskController.js"></script>
         <!--dashboard-->
-    <script src="dashboard/dashboard.js"></script>
-    <script src="dashboard/dashboardController.js"></script>
+        <script src="dashboard/dashboardService.js"></script>
+        <script src="dashboard/dashboard.js"></script>
+        <script src="dashboard/dashboardController.js"></script>
 
 
 

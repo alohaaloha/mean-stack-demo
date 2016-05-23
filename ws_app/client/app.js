@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wsapp', ['ngResource', 'ui.router'])
+angular.module('wsapp', ['ngResource', 'ui.router', 'googlechart'])
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise('/home');

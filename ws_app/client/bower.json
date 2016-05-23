@@ -1,0 +1,40 @@
+{
+  "name": "client",
+  "homepage": "https://github.com/alohaaloha/web_services_pro",
+  "authors": [
+    "marinkovic",
+    "popovic"
+  ],
+  "description": "project for webservices course, ftn",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-aria": "1.4.8",
+    "angular-bootstrap": "0.14.3",
+    "angular-cache-buster": "0.4.3",
+    "angular-cookies": "1.4.8",
+    "angular-loading-bar": "0.8.0",
+    "angular-local-storage": "0.2.3",
+    "angular-mocks": "1.4.8",
+    "angular-resource": "1.4.8",
+    "angular-sanitize": "1.4.8",
+    "angular-ui-router": "0.2.15",
+    "angular-scenario": "1.4.8",
+    "bootstrap": "3.3.5",
+    "chartist": "^0.9.7",
+    "modernizr": "3.2.0",
+    "json3": "3.3.2",
+    "ng-file-upload": "10.0.2",
+    "swagger-ui": "2.1.3",
+    "ngInfiniteScroll": "1.2.1",
+    "angular-chart.js": "^0.10.2",
+    "angular-google-chart": "0.1.0"
+  }
+}
