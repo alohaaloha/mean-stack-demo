@@ -119,6 +119,6 @@ router
                 var returnJSON = {list:returList,"notFinishedTasks":neuradjeniZadaci};
                 res.json({success:true, msg:"USER AND TASKSSSSSSSSSSSS",data:returnJSON});
         });
-})
+});
 
  module.exports = router;
