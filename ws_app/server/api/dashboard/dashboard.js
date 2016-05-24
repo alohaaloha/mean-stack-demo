@@ -119,6 +119,75 @@ router
                 var returnJSON = {list:returList,"notFinishedTasks":neuradjeniZadaci};
                 res.json({success:true, msg:"USER AND TASKSSSSSSSSSSSS",data:returnJSON});
         });
+}).get('/dynamiccreation/:id',function(req,res,next){
+  /*Returns list of pair {day: day, numberOfTasks: numberOfTasks}  */
+    Project.findOne(
+            { _id: req.params.id }
+            ,
+            function (err, doc) {
+              if (err) {
+                res.send({success:false, msg:'Cannot read from database.'});
+                return;
+              }
+
+
+            }).populate('tasks').exec(function(err, entry) {
+            if (err){
+                 res.send({success:false, msg:'Error, couldnt populate with tasks.'});
+                 return;
+            }
+
+            var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
+
+            for(var i =0;i<entry.tasks.length;i++){
+                var splited = []
+                splited = entry.tasks[i].createdAt.toString().split(" ");
+                var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
+                 console.log(dateString);
+                 if(!(dateString in mapOfPairs)){
+                      mapOfPairs[dateString.toString()]=1;
+                 }else{
+                      mapOfPairs[dateString.toString()]++;
+                 }
+            }
+            res.json({success:true, msg:"DATE AND NUMBER OF TASKS",data:mapOfPairs});
+        });
+}).get('/dynamicfinishing/:id',function(req,res,next){
+  /*Returns list of pair {day: day, numberOfDoneTasks: numberOfDoneTasks}  */
+    Project.findOne(
+            { _id: req.params.id }
+            ,
+            function (err, doc) {
+              if (err) {
+                res.send({success:false, msg:'Cannot read from database.'});
+                return;
+              }
+
+
+            }).populate('tasks').exec(function(err, entry) {
+            if (err){
+                 res.send({success:false, msg:'Error, couldnt populate with tasks.'});
+                 return;
+            }
+
+
+            var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
+
+            for(var i =0;i<entry.tasks.length;i++){
+                if(entry.tasks[i].status==="DONE"){
+                var splited = []
+                splited = entry.tasks[i].updatedAt.toString().split(" ");
+                var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
+                 console.log(dateString);
+                 if(!(dateString in mapOfPairs)){
+                      mapOfPairs[dateString.toString()]=1;
+                 }else{
+                      mapOfPairs[dateString.toString()]++;
+                 }
+                }
+            }
+            res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
+        });
 });
 
  module.exports = router;

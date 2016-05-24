@@ -92,25 +92,83 @@ dashboardService.finishedTasksPerUser(
           'title': ' '
       };
 
-projectService.getById(
+dashboardService.dynamiccreation(
   $stateParams.id,
   function(res){
     console.log("stigo jej3");
     console.log(res.data);
 
-    for(var i=0;i<res.data.data.tasks.length;i++){
-      var o1={c:[]};
-      var o2={v:res.data.data.tasks[i].username};
-      var o3={v:res.data.data.tasks[i].numberOfDoneTasks};
-      o1.c.push(o2); o1.c.push(o3);
-      $scope.myChartObject3.data.rows.push(o1);
+  //  for(var i=0;i<res.data.data.length;i++){
+  var obj=res.data.data;
+  for (var property in obj) {
+    if (obj.hasOwnProperty(property)) {
+        // do stuff
+        var o1={c:[]};
+        var o2={v:property};
+        var o3={v:obj[property]};
+        o1.c.push(o2); o1.c.push(o3);
+        $scope.myChartObject3.data.rows.push(o1);
     }
+  }
+      //var o1={c:[]};
+    ///  var o2={v:res.data.data.tasks[i].username};
+    //  var o3={v:res.data.data.tasks[i].numberOfDoneTasks};
+  //    o1.c.push(o2); o1.c.push(o3);
+  //    $scope.myChartObject3.data.rows.push(o1);
+    //}
 
   },
   function(res){
 
   }
 );
+
+//FINISHINIG-------------------------------------------------------------
+
+$scope.myChartObject4 = {};
+$scope.myChartObject4.type = "ColumnChart";
+$scope.myChartObject4.data = {
+  "cols": [
+        {id: "t", label: "DAY", type: "string"},
+        {id: "s", label: "COUNT", type: "number"}
+    ],
+    "rows": []
+  };
+$scope.myChartObject4.options = {
+        'title': ' '
+    };
+
+dashboardService.dynamicfinishing(
+$stateParams.id,
+function(res){
+  console.log("stigo jej3");
+  console.log(res.data);
+
+//  for(var i=0;i<res.data.data.length;i++){
+var obj=res.data.data;
+for (var property in obj) {
+  if (obj.hasOwnProperty(property)) {
+      // do stuff
+      var o1={c:[]};
+      var o2={v:property};
+      var o3={v:obj[property]};
+      o1.c.push(o2); o1.c.push(o3);
+      $scope.myChartObject4.data.rows.push(o1);
+  }
+}
+    //var o1={c:[]};
+  ///  var o2={v:res.data.data.tasks[i].username};
+  //  var o3={v:res.data.data.tasks[i].numberOfDoneTasks};
+//    o1.c.push(o2); o1.c.push(o3);
+//    $scope.myChartObject3.data.rows.push(o1);
+  //}
+
+},
+function(res){
+
+}
+);
+
 
 
 
