@@ -187,6 +187,29 @@ router
             }
             res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
         });
+}).get('/dynamicfinishingbyuser/:id',function(req,res,next){
+  
+    Project.findOne(
+            { _id: req.params.id }
+            ,
+            function (err, doc) {
+              if (err) {
+                res.send({success:false, msg:'Cannot read from database.'});
+                return;
+              }
+
+
+            }).populate('tasks').exec(function(err, entry) {
+            if (err){
+                 res.send({success:false, msg:'Error, couldnt populate with tasks.'});
+                 return;
+            }
+            
+           
+            
+            
+            res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
+        });
 })
 
  module.exports = router;
