@@ -77,35 +77,112 @@ dashboardService.finishedTasksPerUser(
   function(res){
 
   });
-  //----------------------------------------------------------------------------
+  //TASKS IN MOMENT-------------------------------------------------------------
+
+  $scope.myChartObject3 = {};
+  $scope.myChartObject3.type = "ColumnChart";
+  $scope.myChartObject3.data = {
+    "cols": [
+          {id: "t", label: "DAY", type: "string"},
+          {id: "s", label: "COUNT", type: "number"}
+      ],
+      "rows": []
+    };
+  $scope.myChartObject3.options = {
+          'title': ' '
+      };
+
+dashboardService.dynamiccreation(
+  $stateParams.id,
+  function(res){
+    console.log("stigo jej3");
+    console.log(res.data);
+
+  //  for(var i=0;i<res.data.data.length;i++){
+  var obj=res.data.data;
+  for (var property in obj) {
+    if (obj.hasOwnProperty(property)) {
+        // do stuff
+        var o1={c:[]};
+        var o2={v:property};
+        var o3={v:obj[property]};
+        o1.c.push(o2); o1.c.push(o3);
+        $scope.myChartObject3.data.rows.push(o1);
+    }
+  }
+      //var o1={c:[]};
+    ///  var o2={v:res.data.data.tasks[i].username};
+    //  var o3={v:res.data.data.tasks[i].numberOfDoneTasks};
+  //    o1.c.push(o2); o1.c.push(o3);
+  //    $scope.myChartObject3.data.rows.push(o1);
+    //}
+
+  },
+  function(res){
+
+  }
+);
+
+//FINISHINIG-------------------------------------------------------------
+
+$scope.myChartObject4 = {};
+$scope.myChartObject4.type = "ColumnChart";
+$scope.myChartObject4.data = {
+  "cols": [
+        {id: "t", label: "DAY", type: "string"},
+        {id: "s", label: "COUNT", type: "number"}
+    ],
+    "rows": []
+  };
+$scope.myChartObject4.options = {
+        'title': ' '
+    };
+
+dashboardService.dynamicfinishing(
+$stateParams.id,
+function(res){
+  console.log("stigo jej3");
+  console.log(res.data);
+
+//  for(var i=0;i<res.data.data.length;i++){
+var obj=res.data.data;
+for (var property in obj) {
+  if (obj.hasOwnProperty(property)) {
+      // do stuff
+      var o1={c:[]};
+      var o2={v:property};
+      var o3={v:obj[property]};
+      o1.c.push(o2); o1.c.push(o3);
+      $scope.myChartObject4.data.rows.push(o1);
+  }
+}
+    //var o1={c:[]};
+  ///  var o2={v:res.data.data.tasks[i].username};
+  //  var o3={v:res.data.data.tasks[i].numberOfDoneTasks};
+//    o1.c.push(o2); o1.c.push(o3);
+//    $scope.myChartObject3.data.rows.push(o1);
+  //}
+
+},
+function(res){
+
+}
+);
 
 
 
 
 
 
-/*  EXAMPLE OF DATA FOR GRAPH - DO NOT DELETE
-var t1={c:[]};
-var t2={};
-t1.c.push()
-$scope.myChartObject.data.rows=[
-  {c: [
-      {v: "Mushrooms"},
-      {v: 3},
-  ]},
-  {c: [
-      {v: "Olives"},
-      {v: 31}
-  ]},
-  {c: [
-      {v: "Zucchini"},
-      {v: 1},
-  ]},
-  {c: [
-      {v: "Pepperoni"},
-      {v: 2},
-  ]}];
-*/
+
+
+
+
+
+
+
+
+
 
 
     });

@@ -37,7 +37,7 @@ router
 
   })
   .get('/', function(req, res) {
-    /*GET PROJECT FOR LOGED USER*/
+    /*GET PROJECTs FOR LOGED USER*/
 
       Project.find(
             { creator: req.session.user._id },
@@ -82,12 +82,12 @@ router
 
   })
   .delete('/', function(req, res, next) {
-         
+
          Project.remove({"_id":req.body._id},function (err, successIndicator) {
                     if(err) next(err);
-                                        
+
                      res.json({success: true, msg: 'Successful deleted!'});
-                    
+
                });
   });
 

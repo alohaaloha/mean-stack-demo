@@ -25,6 +25,28 @@ angular.module('wsapp')
 					}
 
 					$http(req).then(onSuccess, onError);
+		},
+		dynamiccreation: function(proID,onSuccess,onError){
+
+					var req = {
+							method: 'GET',
+							url: '/api/dashboard/dynamiccreation/'+proID,
+							headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+							}
+					}
+					$http(req).then(onSuccess, onError);
+		},
+		dynamicfinishing: function(proID,onSuccess,onError){
+
+					var req = {
+							method: 'GET',
+							url: '/api/dashboard/dynamicfinishing/'+proID,
+							headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+							}
+					}
+					$http(req).then(onSuccess, onError);
 		}
 
 	}

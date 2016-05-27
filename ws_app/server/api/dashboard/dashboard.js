@@ -136,9 +136,9 @@ router
                  res.send({success:false, msg:'Error, couldnt populate with tasks.'});
                  return;
             }
-            
+
             var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
-            
+
             for(var i =0;i<entry.tasks.length;i++){
                 var splited = []
                 splited = entry.tasks[i].createdAt.toString().split(" ");
@@ -169,9 +169,10 @@ router
                  res.send({success:false, msg:'Error, couldnt populate with tasks.'});
                  return;
             }
-            
+
+
             var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
-            
+
             for(var i =0;i<entry.tasks.length;i++){
                 if(entry.tasks[i].status==="DONE"){
                 var splited = []
