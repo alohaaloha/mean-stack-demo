@@ -7,7 +7,7 @@ var Project = require(__dirname+'/../../../models/project'); // get the mongoose
 var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 
-/*Returns collection of users that word on project with this id*/ 
+/*Returns collection of users that word on project with this id*/
 //'/api/user/project/task'+taskID,
 router
 .get('/project/task/:id',function(req,res,next){
@@ -19,18 +19,18 @@ router
                     }
                     //nadji kom projektu pripada task
                     var project;
-                    
+
                     for(var i =0;i<entry.length;i++){
                         for(var j = 0;j<entry[i].tasks.length;j++){
                             if(entry[i].tasks[j]==req.params.id){
                                    project = entry[i];
                                    console.log("POGODIO JE :")
                                    console.log(entry[i].tasks[j])
-                                   break;   
+                                   break;
                             }
                         }
                     }
-                   
+
                     // nadji projekat  po ID
                     Project.findOne({_id :project._id},function(err,doc){
                         if(err){
@@ -68,7 +68,7 @@ router
                         }
                     }
                      res.json({success:true, msg:"PROJECTS",projectsImIn:projects});
-                 })
+                 });
 })
 .get('/project/:id',function (req,res,next){
     Project.findOne({_id :req.params.id},
@@ -108,52 +108,52 @@ router
                             res.send({success:false, msg:'Error with datebase.'});
                             return;
                     }
-                    
+
                     res.json({success:true, msg:"USERS",users:doc})
-                    
+
                  })
 }).post('/project',function(req,res,next){
-    
+
        //console.log("PROJEKAT NA KOJI DODAJEM USER-a"+doc);
        console.log("User kojeg dodajem:",req.body.user);
        console.log("ID PROJEKTA",req.body.project);
     Project.findOne({"_id":req.body.project},function (err, entry) {
-    if(err){ 
+    if(err){
         res.send({success:false, msg:'Project does not exist.'});
                             return;
     }
       Project.findByIdAndUpdate(entry._id, {$push:{"usersOnProject":req.body.user._id}}, function (err, entry) {
         if(err) {
         res.send({success:false, msg:'Update user failed.'});
-                            return;           
+                            return;
     };
         res.json({success:true,msg:"USER SUCCESSFULLY ADDED TO PROJECT"});
-        
+
       });
-    
+
     });
 }).post('/task',function(req,res,next){
-    
-     
+
+
     User.findOne({"_id":req.body.user},function (err, entry) {
-    if(err){ 
+    if(err){
         res.send({success:false, msg:'User does not exist.'});
                             return;
     }
       User.findByIdAndUpdate(entry._id, {$push:{"tasksImOn":req.body.task}}, function (err, entry) {
         if(err) {
         res.send({success:false, msg:'Update user failed.'});
-                            return;           
+                            return;
     };
         res.json({success:true,msg:"USER SUCCESSFULLY ADDED TO TASK"});
-        
+
       });
-    
+
     });
 })
 .delete('/',function(req,res,next){
     Project.findOne({"_id":req.body.project},function (err, entry) {
-    if(err){ 
+    if(err){
         res.send({success:false, msg:'Project does not exist.'});
                             return;
     }
@@ -164,19 +164,19 @@ router
       Project.findByIdAndUpdate(entry._id, {"usersOnProject":entry.usersOnProject}, function (err, entry) {
         if(err) {
         res.send({success:false, msg:'Update user failed.'});
-                            return;           
+                            return;
         };
         res.json({success:true,msg:"USER SUCCESSFULLY ADDED TO PROJECT"});
-        
+
       });
-    
+
     });
-    
+
 }).delete('/task',function(req,res,next){
-    
- 
+
+
     User.findOne({"_id":req.body.user},function (err, entry) {
-    if(err){ 
+    if(err){
         res.send({success:false, msg:'User does not exist on session.'});
                             return;
     }
@@ -184,17 +184,17 @@ router
      if (index > -1) {
                 entry.tasksImOn.splice(index, 1);
      }
-     
+
       User.findByIdAndUpdate(entry._id, {"tasksImOn":entry.tasksImOn}, function (err, entry) {
         if(err) {
         res.send({success:false, msg:'Update user failed.'});
-                            return;           
+                            return;
         };
-        
+
         res.json({success:true,msg:"USER SUCCESSFULLY REMOVED FROM TASK"});
-        
+
       });
-    
+
     });
 })
 

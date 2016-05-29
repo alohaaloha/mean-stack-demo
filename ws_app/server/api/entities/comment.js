@@ -24,13 +24,36 @@ router
   })
   .post('/update', function(req, res) {
    ///api/comment/update
-    Comment.findByIdAndUpdate(req.body.comment._id, {"text":req.body.comment.text}, function (err, entry) {
-                    if(err) next(err);
-                    //res.json(entry);
-                    //samo zbog return
-                    
-                    res.json({success: true, msg: 'Successful changed'});
-                  });
+
+   Comment.findOne(
+          {_id:req.body.comment._id},
+          function (err, doc) {
+            if (err) {
+              res.send({success:false, msg:'U bazi sjeb'});
+              return;
+            }
+
+            console.log("OBJ:"+doc);
+            console.log("USER:"+req.session.user._id);
+
+            if(doc.creator==req.session.user._id || req.session.user.role=="ROLE_ADMIN"){
+
+                    //---------------------------------
+                    Comment.findByIdAndUpdate(
+                      req.body.comment._id,
+                      {"text":req.body.comment.text}, function (err, entry) {
+                                    if(err) next(err);
+                                    //res.json(entry);
+                                    //samo zbog return
+
+                                    res.json({success: true, msg: 'Successful changed'});
+                                  });
+                    //---------------------------------
+                  }else {
+                    res.json({success:false, msg:"You can't edit other users' comments!"});
+                  }
+
+        });
 
   }).post('/task', function(req, res) {
     /*GET COMMENTS FOR TASK ID*/
@@ -59,7 +82,7 @@ router
                     if(err) next(err);
                     //res.json(entry);
                     //samo zbog return
-                    
+
                     res.json({success: true, msg: 'Successful created', data:comment});
                   });
                 });
@@ -73,27 +96,54 @@ router
 
   })
   .delete('/', function(req, res, next) {
-       console.log("entered delete of comments")
-       console.log(req.body)
-         Comment.remove({"_id":req.body.comment},function (err, successIndicator) {
-                    if(err) next(err);
-                    
-                   Task.findOne({"_id":req.body.task},function (err, entry) {
-                          
-                                var index = entry.comments.indexOf(req.body.comment);
-                                if (index > -1) {
-                                    entry.comments.splice(index, 1);   
-                                }
-                                var changelist = entry.comments;
-                                Task.findByIdAndUpdate(req.body.task, {"comments":changelist}, function (err, entry) {
-                                    if(err) next(err);
-                                        res.json({success: true, msg: 'Successful deleted comment from task.', task:req.body.task});
-                                  });
-                     
-                   })                 
-                    //  res.json({success: true, msg: 'Successful deleted!'});
-                    
-               });
+       console.log("entered delete of comments");
+       console.log("SONETOV ID: "+req.body.comment);
+
+       Comment.findOne(
+              {_id:req.body.comment},
+              function (err, doc) {
+                if (err) {
+                  res.send({success:false, msg:'U bazi sjeb'});
+                  return;
+                }
+
+                console.log("OBJ:"+doc);
+                console.log("USER:"+req.session.user._id);
+
+                if(doc.creator==req.session.user._id || req.session.user.role=="ROLE_ADMIN"){
+
+                //---------------------------------------------------------------
+                Comment.remove(
+                  {"_id":req.body.comment},
+                  function (err, successIndicator) {
+                           if(err) next(err);
+
+                          Task.findOne(
+                            {"_id":req.body.task},
+                            function (err, entry) {
+
+                                       var index = entry.comments.indexOf(req.body.comment);
+                                       if (index > -1) {
+                                           entry.comments.splice(index, 1);
+                                       }
+                                       var changelist = entry.comments;
+                                       Task.findByIdAndUpdate(req.body.task, {"comments":changelist}, function (err, entry) {
+                                           if(err) next(err);
+                                               res.json({success: true, msg: 'Successful deleted comment from task.', task:req.body.task});
+                                         });
+
+                          })
+                           //  res.json({success: true, msg: 'Successful deleted!'});
+                  });
+                  //------------------------------------------------------------
+                }else {
+                  res.json({success:false, msg:"You can't delete other users' comments!"});
+                }
+
+
+
+      });
+
   });
 
 

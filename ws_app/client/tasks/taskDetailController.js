@@ -82,7 +82,10 @@ angular.module('wsapp')
 
 
      $scope.deleteComment= function(taskID,comment){
-            commentService.delete(taskID,comment._id,function(response){
+            commentService.delete(
+              taskID,
+              comment._id,
+              function(response){
                  if(response.data.success){
                           console.log("Deleted comment!");
                           //console.log(response.data);
@@ -91,33 +94,36 @@ angular.module('wsapp')
                           if (index > -1) {
                                $scope.task.comments.splice(index, 1);
                           }
+                          alertify.success(response.data.msg);
 
-
+                  }else{
+                    alertify.error(response.data.msg);
                   }
-            },function(response){
+            },
+            function(response){
                  $state.go('home');
-            })
+            });
      }
 
 
      $scope.editComment = function(taskID,commentObject){
-
             $scope.IsVisible = true;
             $scope.changedComment=commentObject;
-
-
      }
+
      $scope.changeComment = function(commentObj){
          commentService.updateComment(commentObj, function(response) {
                 //alertify
                 if(response.data.success){
                      alertify.success("Successfully changed comment.");
                      $scope.IsVisible = false;
+                }else {
+                     alertify.error(response.data.msg);
                 }
-
             }, function(response){
                  $state.go('home');
             })
-
      }
+
+
     });
