@@ -2,15 +2,17 @@
 
 angular.module('wsapp')
     .controller('TaskDetailController', function ($scope, $state, authService, projectService, taskService, $stateParams, commentService) {
-            
-    authService.authenticate(
-                            function(response){
-                                if(!response.data.success)
-                                	$state.go('home');
-                            },
-                            function(response){
-                               $state.go('home');
-                            });
+
+      authService.authenticate(
+                              function(response){
+                                if(!response.data.success){
+                                  $state.go('home');
+                                }
+                                $scope.role=response.data.user.role;
+                              },
+                              function(response){
+                                 $state.go('home');
+                              });
 
 
     taskService.getById(
@@ -58,13 +60,13 @@ angular.module('wsapp')
             function(response){
             }
         );
-        
-       
+
+
     }
-    
+
      $scope.deleteTaskFromProject =  function(taskObj){
-             
-              
+
+
                taskService.delete(taskObj,function(response){
                    //edittask({id:task._id})
                   if(response.data.success){
@@ -73,9 +75,9 @@ angular.module('wsapp')
                   }
                     //
                },function(response){
-                   
+
                });
-            
+
         }
 
 
@@ -89,33 +91,33 @@ angular.module('wsapp')
                           if (index > -1) {
                                $scope.task.comments.splice(index, 1);
                           }
-                          
-                          
+
+
                   }
             },function(response){
                  $state.go('home');
             })
      }
-     
-     
+
+
      $scope.editComment = function(taskID,commentObject){
-        
-            $scope.IsVisible = true;    
+
+            $scope.IsVisible = true;
             $scope.changedComment=commentObject;
-            
-            
+
+
      }
      $scope.changeComment = function(commentObj){
          commentService.updateComment(commentObj, function(response) {
                 //alertify
                 if(response.data.success){
                      alertify.success("Successfully changed comment.");
-                     $scope.IsVisible = false;  
+                     $scope.IsVisible = false;
                 }
-                      
+
             }, function(response){
                  $state.go('home');
             })
-         
+
      }
     });

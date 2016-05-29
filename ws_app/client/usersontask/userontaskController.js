@@ -4,14 +4,16 @@ angular.module('wsapp')
     .controller('userontaskController', function ($scope, projectService,userontaskService,userService,taskService, $state, authService, $stateParams) {
 
 
-authService.authenticate(
-                          function(response){
-                                if(!response.data.success)
-                                	$state.go('home');
-                            },
-                            function(response){
-                               $state.go('home');
-                            });
+      authService.authenticate(
+                              function(response){
+                                if(!response.data.success){
+                                  $state.go('home');
+                                }
+                                $scope.role=response.data.user.role;
+                              },
+                              function(response){
+                                 $state.go('home');
+                              });
 
 taskService.getById(
             $stateParams.id,
@@ -22,7 +24,7 @@ taskService.getById(
                     console.log($scope.task);
             },
             function(response){
-                       
+
             }
      );
 userService.getAllUsersCapableForAdingTasks($stateParams.id,function(response){
@@ -32,58 +34,58 @@ userService.getAllUsersCapableForAdingTasks($stateParams.id,function(response){
                                         console.log($stateParams.id);
                                         if(!response.data.success){
                                            $state.go('home');
-                                       
+
                                         }else{
                                             console.log("STIGAOO ODGOVOR SA USERIMA SPOSOBNIM ZA TASKOVE!")
                                             console.log(response.data);
                                             $scope.collection = response.data.data.usersOnProject;
-                                            
-                                               
+
+
                                         }
                                      },
                                      function(response){
                                               $state.go('home');
-                                     }       
+                                     }
                                      );
-                                     
+
 //$scope.collection = response.data.projectsImIn
 
 userontaskService.get($stateParams.id,function(response){
                         if(!response.data.success){
                                            $state.go('home');
-                                       
+
                                         }else{
-                                            
+
                                             console.log(response.data);
-                                            $scope.collectionUsersOnTask = response.data.collectionUsersOnTask; 
+                                            $scope.collectionUsersOnTask = response.data.collectionUsersOnTask;
                                         }
-    
+
 },function (response) {
                        $state.go('home');
-    
+
 }
 );
 $scope.addUserToTaskController = function(user){
-    
+
      for(var i = 0;i<$scope.collectionUsersOnTask.length;i++){
                 if($scope.collectionUsersOnTask[i]._id == user._id){
                    alertify.error("USER ALREADY EXIST IN TASK!");
-                   return; 
+                   return;
                 }
             }
-    
+
     userontaskService.addUserOnTask($stateParams.id, user._id,function (response) {
                         if(!response.data.success){
                                            $state.go('home');
-                                       
+
                                         }else{
                                             //console.log(response.data);
-                                            $scope.collectionUsersOnTask.push(user); 
+                                            $scope.collectionUsersOnTask.push(user);
                                         }
     },function (response) {
                  $state.go('home');
     });
-}   
+}
 
  $scope.removeUserFromTaskController = function(user){
      console.log("OKINUO SE DOGADJAAAAAAAAAAAAAAAAAAAAAAJ ZA REMOVE USER")
@@ -95,7 +97,7 @@ $scope.addUserToTaskController = function(user){
                                         if(!response.data.success){
                                            $state.go('home');
                                            console.log("1");
-                                           console.log(response.data);    
+                                           console.log(response.data);
                                     }else{
                                             console.log("2");
                                             alertify.success("REMOVED USER FROM TASK!");
@@ -105,18 +107,18 @@ $scope.addUserToTaskController = function(user){
                                             if (index > -1) {
                                                     $scope.collectionUsersOnTask.splice(index, 1);
                                             }
-                                            
+
                                         }
                                      },
                                      function(response){
-                                          
+
                                             $state.go('home');
                                             console.log("1");
-                                            console.log(response.data); 
-                                    } 
+                                            console.log(response.data);
+                                    }
             );
-        
+
     }
-    
-  
+
+
     });

@@ -7,14 +7,14 @@
         STATUS: <h4>{{task.status}}</h4>
         PRIORITY: <h4>{{task.priority}}</h4>
     </div>
-    
+
      <h3>
             USERS ON THIS TASK
             <span class="badge">
                 {{collectionUsersOnTask.length}}
             </span>
         </h3>
-    
+
     <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -26,10 +26,10 @@
                 <tbody>
                 <tr ng-repeat="model in collectionUsersOnTask">
                     <td>{{model.username}}</td>
-                    
+
                     <td>
                         <button ng-click="removeUserFromTaskController(model)"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm" ng-show="role=='ROLE_ADMIN'">
                             <span class="glyphicon glyphicon-minus"></span>&nbsp;<span>REMOVE</span>
                         </button>
                     </td>
@@ -37,7 +37,7 @@
                 </tbody>
             </table>
         </div>
-     
+
      <h3>
         USER LIST
         <span class="badge">
@@ -58,9 +58,9 @@
             <tr ng-repeat="model in collection">
                 <td>{{model.username}}</td>
                 <td>
-                    <button 
+                    <button
                             class="btn btn-primary btn-sm"
-                            ng-click="addUserToTaskController(model)">
+                            ng-click="addUserToTaskController(model)" ng-show="role=='ROLE_ADMIN'">
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
                     </button>
                 </td>

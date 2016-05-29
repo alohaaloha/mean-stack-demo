@@ -36,15 +36,24 @@ var signUp=require('./server/api/auth/signUp');
 app.use('/api/signup', signUp);
 var signIn=require('./server/api/auth/signIn');
 app.use('/api/signin', signIn);
-//TODO middlware neki da se apijima moze pristupiti samo ako si logovan
 var authenticate=require('./server/api/auth/authenticate');
 app.use('/api/authenticate', authenticate);
 var signout=require('./server/api/auth/signout');
 app.use('/api/signout', signout);
+
+/*NEED USER IN SESSION FOR APIs*/
+app.use(function (req, res, next) {
+  //console.log('Time:', Date.now());
+  if(req.session.user==null){
+    res.json({success:false, msg:"NE MOZE BRE"});
+  }else {
+    next();
+  }
+});
+
 /* crud for 'project' */
 var project=require('./server/api/entities/project');
 app.use('/api/project', project);
-
 /* crud for 'taks' */
 var task=require('./server/api/entities/task');
 app.use('/api/task', task);

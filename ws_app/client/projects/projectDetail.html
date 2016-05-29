@@ -6,13 +6,13 @@
             DEADLINE: <h4>{{project.deadline}}</h4>
             LAST UPDATE: <h4>{{project.updatedAt}}</h4>
 
-                <button type="submit"
+                <button type="submit" ng-show="role=='ROLE_ADMIN'"
                         ui-sref="projectdetail({id:project._id})"
                         class="btn btn-warning btn-sm">
                     <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>EDIT PROJECT</span>
                 </button>
 
-                <button type="submit"
+                <button type="submit" ng-show="role=='ROLE_ADMIN'"
                         ng-click="deleteProject(project)"
                         class="btn btn-danger btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>&nbsp;<span>DELETE PROJECT</span>

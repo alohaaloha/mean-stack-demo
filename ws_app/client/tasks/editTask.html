@@ -2,22 +2,22 @@
     <div class="col-md-4 col-md-offset-4">
         <h3>EDIT TASK</h3>
 
-        <div class="input-group">
+        <div class="input-group" ng-show="role=='ROLE_ADMIN'">
             <span class="input-group-addon" id="basic-addon1">TITLE</span>
             <input type="text" class="form-control"  ng-model="task.title">
         </div>
-        <div class="input-group">
+        <div class="input-group" ng-show="role=='ROLE_ADMIN'">
             <span class="input-group-addon" id="basic-addon1">DESCRIPTION</span>
             <input type="text" class="form-control"  ng-model="task.description">
         </div>
         TASK DEADLINE: {{task.deadline}}
-        <div class="input-group">
+        <div class="input-group" ng-show="role=='ROLE_ADMIN'">
             <span class="input-group-addon" id="basic-addon1">DEADLINE</span>
             <input type="date" class="form-control" ng-model="task.deadline">
         </div>
 
         TASK PRIORITY: {{task.priority}}
-        <div class="btn-group" role="group" aria-label="...">
+        <div class="btn-group" role="group" aria-label="..." ng-show="role=='ROLE_ADMIN'">
             <button type="button" class="btn btn-default" ng-click="changePriority('BLOCKER')">BLOCKER</button>
             <button type="button" class="btn btn-default" ng-click="changePriority('CRITICAL')">CRITICAL</button>
             <button type="button" class="btn btn-default" ng-click="changePriority('MAJOR')">MAJOR</button>

@@ -7,7 +7,7 @@
             </span>
         </h3>
 
-        
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -19,10 +19,10 @@
                 <tbody>
                 <tr ng-repeat="model in collectionUsersOnProject">
                     <td>{{model.username}}</td>
-                    
+
                     <td>
                         <button ng-click="removeUserFromProjectController(model)"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm" ng-show="role=='ROLE_ADMIN'">
                             <span class="glyphicon glyphicon-minus"></span>&nbsp;<span>REMOVE</span>
                         </button>
                     </td>
@@ -53,9 +53,9 @@
             <tr ng-repeat="model in collection">
                 <td>{{model.username}}</td>
                 <td>
-                    <button 
+                    <button
                             class="btn btn-primary btn-sm"
-                            ng-click="addUserToProjectController(model)">
+                            ng-click="addUserToProjectController(model)" ng-show="role=='ROLE_ADMIN'">
                         <span class="glyphicon glyphicon-plus"></span>&nbsp;<span>ADD</span>
                     </button>
                 </td>

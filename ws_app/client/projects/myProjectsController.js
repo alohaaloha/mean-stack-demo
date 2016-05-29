@@ -5,11 +5,13 @@ angular.module('wsapp')
 
 	authService.authenticate(
                             function(response){
-                                if(!response.data.success)
-                                	$state.go('home');
-                            }, 
+                              if(!response.data.success){
+                                $state.go('home');
+                              }
+                              $scope.role=response.data.user.role;
+                            },
                             function(response){
-                               $state.go('home'); 
+                               $state.go('home');
                             });
 
 
@@ -21,9 +23,9 @@ angular.module('wsapp')
                                 	console.log(response.data);
                                 	$scope.collection=response.data.data;
                                 }
-                            }, 
+                            },
                             function(response){
-                               $state.go('home'); 
+                               $state.go('home');
                             });
 
 

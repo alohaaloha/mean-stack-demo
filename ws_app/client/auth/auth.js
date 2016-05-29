@@ -13,7 +13,7 @@ angular.module('wsapp')
                        },
                        'navbar':{
                            templateUrl: 'navbar/navbar.html',
-                           //controller: 'WelcomeController'
+                           controller: 'NavbarController'
                        }
                    }
                })
@@ -26,7 +26,7 @@ angular.module('wsapp')
                        },
                        'navbar':{
                            templateUrl: 'navbar/navbar.html',
-                           //controller: 'WelcomeController'
+                           controller: 'NavbarController'
                        }
                    }
                })
@@ -39,7 +39,7 @@ angular.module('wsapp')
                        },
                        'navbar':{
                            templateUrl: 'navbar/navbar.html',
-                           //controller: 'WelcomeController'
+                           controller: 'NavbarController'
                        }
                    }
                })

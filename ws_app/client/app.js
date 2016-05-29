@@ -14,7 +14,7 @@ angular.module('wsapp', ['ngResource', 'ui.router', 'googlechart'])
                        },
                        'navbar':{
                            templateUrl: 'navbar/navbar.html',
-                           //controller: 'WelcomeController'
+                           controller: 'NavbarController'
                        }
                    }
                });

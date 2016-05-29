@@ -5,8 +5,10 @@ angular.module('wsapp')
 
 	authService.authenticate(
                             function(response){
-                                if(!response.data.success)
+                                if(!response.data.success){
                                 	$state.go('home');
+                                }
+                                $scope.role=response.data.user.role;
                             },
                             function(response){
                                $state.go('home');

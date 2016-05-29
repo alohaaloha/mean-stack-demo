@@ -12,7 +12,7 @@ angular.module('wsapp')
                     },
                     'navbar':{
                         templateUrl: 'navbar/navbar.html',
-                        //controller: 'WelcomeController'
+                        controller: 'NavbarController'
                     }
                 }
         })
@@ -22,4 +22,3 @@ angular.module('wsapp')
         //$locationProvider.html5Mode(true);
 
     });
-    

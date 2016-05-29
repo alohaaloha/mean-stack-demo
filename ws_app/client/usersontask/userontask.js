@@ -12,14 +12,13 @@ angular.module('wsapp')
                     },
                     'navbar':{
                         templateUrl: 'navbar/navbar.html',
-                        //controller: 'WelcomeController'
+                        controller: 'NavbarController'
                     }
                 }
         });
-        
-        
+
+
 
         //$locationProvider.html5Mode(true);
 
     });
-    

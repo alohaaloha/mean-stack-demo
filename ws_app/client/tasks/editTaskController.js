@@ -4,14 +4,17 @@ angular.module('wsapp')
     .controller('EditTaskController', function ($scope, $location, taskService, $state, authService, $stateParams) {
 
 
-	authService.authenticate(
-                            function(response){
-                                if(!response.data.success)
-                                	$state.go('home');
-                            },
-                            function(response){
-                               $state.go('home');
-                            });
+      authService.authenticate(
+                              function(response){
+                                if(!response.data.success){
+                                  $state.go('home');
+                                }
+                                $scope.role=response.data.user.role;
+                              },
+                              function(response){
+                                 $state.go('home');
+                              });
+
 
 
 

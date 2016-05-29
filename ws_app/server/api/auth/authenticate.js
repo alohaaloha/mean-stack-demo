@@ -11,7 +11,10 @@ router
       if(!req.session.user){
       	res.send({success: false});
       }else{
-      	res.send({success: true});
+        var userDTO={};
+        userDTO.username=req.session.user.username;
+        userDTO.role=req.session.user.role;
+      	res.send({success: true, user:userDTO});
       }
   });
 
