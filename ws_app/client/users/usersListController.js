@@ -36,7 +36,7 @@ userService.getAll(function(response){
                                            $state.go('home');
 
                                         }else{
-                                            //console.log(response.data);
+                                            
                                             $scope.collection = response.data.users;
 
 

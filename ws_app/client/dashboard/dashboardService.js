@@ -48,14 +48,15 @@ angular.module('wsapp')
 					}
 					$http(req).then(onSuccess, onError);
 		},
-		dynamicfinishingperUser: function(onSuccess,onError){
+		dynamicfinishingperUser: function(userObj,proj,onSuccess,onError){
 
 					var req = {
-							method: 'GET',
+							method: 'POST',
 							url: '/api/dashboard/dynamicfinishingperuser',
 							headers: {
 									'Content-Type': 'application/x-www-form-urlencoded'
-							}
+							},
+							data: $.param({user:userObj,projId:proj})
 					}
 					$http(req).then(onSuccess, onError);
 		}

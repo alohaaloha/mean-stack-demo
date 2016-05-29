@@ -15,8 +15,19 @@ angular.module('wsapp')
                         controller: 'NavbarController'
                     }
                 }
+            }).state('weldash', {
+                url: '/weldash',
+                views: {
+                    'content': {
+                        templateUrl: 'dashboard/welDash.html',
+                        controller: 'WelDashController'
+                    },
+                    'navbar':{
+                        templateUrl: 'navbar/navbar.html',
+                        controller: 'NavbarController'
+                    }
+                }
             })
-
-        ;
+            ;
 
     });

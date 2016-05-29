@@ -8,44 +8,7 @@ var User = require(__dirname+'/../../../models/user'); // get the mongoose model
 var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 
 /*Returns list of pair {username: username, numberOfTasks: numberOfTasks}*/
-router.get('/dynamicfinishingperuser',function(req,res,next){
-    // req.session.user._id
-  
-    User.findOne(
-            { _id: req.session.user._id }
-            ,
-            function (err, doc) {
-              if (err) {
-                res.send({success:false, msg:'Cannot read from database.'});
-                return;
-              }
-
-
-            }).populate('tasksImOn').exec(function(err, entry) {
-            if (err){
-                 res.send({success:false, msg:'Error, couldnt populate with tasks.'});
-                 return;
-            }
-            
-            var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
-            
-             for(var i =0;i<entry.tasksImOn.length;i++){
-                if(entry.tasksImOn[i].status==="DONE"){
-                var splited = []
-                splited = entry.tasksImOn[i].updatedAt.toString().split(" ");
-                var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
-                 console.log(dateString);
-                 if(!(dateString in mapOfPairs)){
-                      mapOfPairs[dateString.toString()]=1;
-                 }else{
-                      mapOfPairs[dateString.toString()]++;
-                 }
-                }
-            }
-            
-            res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS PER USER",data:mapOfPairs});
-        });
-})
+router
 .get('/:id',function(req,res,next){
 
     Project.findOne(
@@ -225,6 +188,94 @@ router.get('/dynamicfinishingperuser',function(req,res,next){
             }
             res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
         });
+}).post('/dynamicfinishingperuser',function(req,res,next){
+       Project.findOne(
+            { _id: req.body.projId}
+            ,
+            function (err, doc) {
+              if (err) {
+                res.send({success:false, msg:'Cannot read from database.'});
+                return;
+              }
+
+
+            }).populate('tasks').exec(function(err, entry) {
+            if (err){
+                 res.send({success:false, msg:'Error, couldnt populate with tasks.'});
+                 return;
+            }
+
+            var user = req.body.user;
+              
+            var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
+            //if(entry.tasks[k]._id.equals(entry.usersOnProject[i].tasksImOn[j])){
+            //if(user.tasksImOn[j].equals(entry.tasks[i]._id)){  
+            for(var i =0;i<entry.tasks.length;i++){
+                if(entry.tasks[i].status==="DONE"){
+                    for(var j=0;j<user.tasksImOn.length;j++){
+                      if(entry.tasks[i]._id.equals(user.tasksImOn[j])){  
+                          var splited = []
+                          splited = entry.tasks[i].updatedAt.toString().split(" ");
+                          var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
+                          console.log(dateString);
+                          if(!(dateString in mapOfPairs)){
+                                mapOfPairs[dateString.toString()]=1;
+                          }else{
+                                mapOfPairs[dateString.toString()]++;
+                          }
+                      }
+                    }
+               }
+            }
+            res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
+        });
+    
+    
+    
+    // req.session.user._id
+    
+    // User.findOne(   // nadjem korisnika za kog trazim izvjestaj
+    //         { _id: req.params.id }
+    //         ,
+    //         function (err, doc) {
+    //           if (err) {
+    //             res.send({success:false, msg:'Cannot read from database.'});
+    //             return;
+    //           }
+
+
+    //         }).populate('tasksImOn').exec(function(err, entry) {
+    //         if (err){
+    //              res.send({success:false, msg:'Error, couldnt populate with tasks.'});
+    //              return;
+    //         }
+            
+            
+            // var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
+            
+            //  for(var i =0;i<entry.tasksImOn.length;i++){
+            //     if(entry.tasksImOn[i].status==="DONE"){
+            //     var splited = []
+            //     splited = entry.tasksImOn[i].updatedAt.toString().split(" ");
+            //     var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
+            //      console.log(dateString);
+            //      if(!(dateString in mapOfPairs)){
+            //           mapOfPairs[dateString.toString()]=1;
+            //      }else{
+            //           mapOfPairs[dateString.toString()]++;
+            //      }
+            //     }
+            // }
+            // //vracam mapu koja sadrzi parove dan i broj uradjenih taskova po korisniku
+            // res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS PER USER",data:mapOfPairs});
+            
+            
+            
+   //     });
+   
+   
+   
+   
 })
 
  module.exports = router;

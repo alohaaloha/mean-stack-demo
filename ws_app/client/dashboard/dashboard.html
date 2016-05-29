@@ -26,7 +26,12 @@
     <h4>
         FINISHING TASKS PER USER - TIMELINE
     </h4>
-
+    
+  
+    <select  style="height:20px; width:20%;"
+      ng-options="model.username for model in collectionUsersOnProject track by model._id"
+      ng-model="selectedItem" ng-change="updateGraph()"></select>
+    
     <div google-chart chart="myChartObject5" style="height:200px; width:100%;"></div>
 
 

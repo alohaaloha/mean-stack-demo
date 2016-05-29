@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('wsapp')
-    .controller('DashboardController', function ($scope, $state, $stateParams, authService, projectService, dashboardService) {
+    .controller('DashboardController', function ($scope, $state, $stateParams, authService, userService,projectService, dashboardService) {
 
 	authService.authenticate(
                             function(response){
@@ -15,6 +15,76 @@ angular.module('wsapp')
                             });
 
 //http://angular-google-chart.github.io/angular-google-chart/docs/0.1.0/examples/
+
+//TIMELINE FINISHINIG PER USER-------------------------------------------------------------
+
+$scope.myChartObject5 = {};
+$scope.myChartObject5.type = "ColumnChart";
+$scope.myChartObject5.data = {
+  "cols": [
+        {id: "t", label: "DAY", type: "string"},
+        {id: "s", label: "COUNT", type: "number"}
+    ],
+    "rows": []
+  };
+$scope.myChartObject5.options = {
+        'title': ' '
+    };
+
+
+
+userService.get($stateParams.id,
+                                function(response){
+                                    if(!response.data.success){
+                                        $state.go('home');
+                                    }else{
+                                       $scope.collectionUsersOnProject = response.data.data.usersOnProject;
+                                       //response.data.data.usersOnProject
+                                       console.log(response);
+                                    }
+                                },
+                                function(response){
+                                   $state.go('home');
+                                });
+
+$scope.updateGraph = function () {
+        
+        dashboardService.dynamicfinishingperUser($scope.selectedItem,$stateParams.id,
+function(res){
+  console.log("Stigao je odgovor za peti dijagram");
+  console.log(res.data);
+  $scope.myChartObject5 = {};
+  $scope.myChartObject5.type = "ColumnChart";
+  $scope.myChartObject5.data = {
+  "cols": [
+        {id: "t", label: "DAY", type: "string"},
+        {id: "s", label: "COUNT", type: "number"}
+    ],
+    "rows": []
+  };
+$scope.myChartObject5.options = {
+        'title': ' '
+    };
+//  for(var i=0;i<res.data.data.length;i++){
+var obj=res.data.data;
+for (var property in obj) {
+  if (obj.hasOwnProperty(property)) {
+      // do stuff
+      var o1={c:[]};
+      var o2={v:property};
+      var o3={v:obj[property]};
+      o1.c.push(o2); o1.c.push(o3);
+      $scope.myChartObject5.data.rows.push(o1);
+  }
+}
+   
+},
+function(res){
+    console.log("ERRROOORRR RESPONSE!")
+    console.log(res);
+}
+);
+}
 
 // TASKS PER USER --------------------------------------------------------------
 $scope.myChartObject = {};
@@ -175,49 +245,10 @@ function(res){
 
 
 
-//TIMELINE FINISHINIG PER USER-------------------------------------------------------------
-
-$scope.myChartObject5 = {};
-$scope.myChartObject5.type = "ColumnChart";
-$scope.myChartObject5.data = {
-  "cols": [
-        {id: "t", label: "DAY", type: "string"},
-        {id: "s", label: "COUNT", type: "number"}
-    ],
-    "rows": []
-  };
-$scope.myChartObject5.options = {
-        'title': ' '
-    };
-
-console.log("PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM")
-console.log("PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM")
-console.log("PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM, PETI DIJAGRAM")
 
 
-dashboardService.dynamicfinishingperUser(
-function(res){
-  console.log("Stigao je odgovor za peti dijagram");
-  console.log(res.data);
 
-//  for(var i=0;i<res.data.data.length;i++){
-var obj=res.data.data;
-for (var property in obj) {
-  if (obj.hasOwnProperty(property)) {
-      // do stuff
-      var o1={c:[]};
-      var o2={v:property};
-      var o3={v:obj[property]};
-      o1.c.push(o2); o1.c.push(o3);
-      $scope.myChartObject5.data.rows.push(o1);
-  }
-}
-   
-},
-function(res){
 
-}
-);
 
 
 
