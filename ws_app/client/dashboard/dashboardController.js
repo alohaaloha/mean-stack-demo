@@ -7,8 +7,13 @@ angular.module('wsapp')
                             function(response){
                                 if(!response.data.success){
                                 	$state.go('home');
+                                }else {
+                                  $scope.role=response.data.user.role;
+                                  if($scope.role=='ROLE_USER'){
+                                    $state.go('home');
+                                  }
                                 }
-                                $scope.role=response.data.user.role;
+
                             },
                             function(response){
                                $state.go('home');

@@ -14,8 +14,7 @@ router
     // http://stackoverflow.com/questions/13077609/mongoose-populate-embedded
     //uz projekat vracam i taskove koji idu za njega - i sve popunjeno
       Project.findOne(
-            { _id: req.params.id }
-            ,
+            { _id: req.params.id },
             function (err, doc) {
               if (err) {
                 //res.send({success:false, msg:'U bazi sjeb'});
