@@ -47,6 +47,17 @@ angular.module('wsapp')
 							}
 					}
 					$http(req).then(onSuccess, onError);
+		},
+		dynamicfinishingperUser: function(onSuccess,onError){
+
+					var req = {
+							method: 'GET',
+							url: '/api/dashboard/dynamicfinishingperuser',
+							headers: {
+									'Content-Type': 'application/x-www-form-urlencoded'
+							}
+					}
+					$http(req).then(onSuccess, onError);
 		}
 
 	}
