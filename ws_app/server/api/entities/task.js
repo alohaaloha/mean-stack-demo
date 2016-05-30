@@ -8,7 +8,38 @@ var Task = require(__dirname+'/../../../models/task'); // get the mongoose model
 var Comment = require(__dirname+'/../../../models/comment'); // get the mongoose model
 
 /*API for entity A*/
-router.get('/user', function(req, res, next) {
+
+
+router.get('/filterbystatus/:id', function(req, res, next) {
+      Task.find({},function(err,entry){
+           if (err) {
+              res.send({success:false, msg:'Error with database, cannot read user.'});
+              return;
+            }
+            
+            var listOfFiltered = [];
+            
+            for(var i=0;i<entry.length;i++){
+                 if(entry[i].status===req.params.id){
+                     listOfFiltered.push(entry[i]);
+                 }
+            }
+            
+            res.json({success:true, msg:"TASKS",data:listOfFiltered});
+
+      })
+                     
+  }).get('/all', function(req, res, next) {
+      Task.find({},function(err,entry){
+           if (err) {
+              res.send({success:false, msg:'Error with database, cannot read user.'});
+              return;
+            }
+            res.json({success:true, msg:"TASKS",data:entry});
+
+      })
+                     
+  }).get('/user', function(req, res, next) {
       User.findOne({_id:req.session.user._id},function(err,entry){
            if (err) {
               res.send({success:false, msg:'Error with database, cannot read user.'});

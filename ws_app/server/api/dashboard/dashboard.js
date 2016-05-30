@@ -230,50 +230,7 @@ router
             res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
         });
     
-    
-    
-    // req.session.user._id
-    
-    // User.findOne(   // nadjem korisnika za kog trazim izvjestaj
-    //         { _id: req.params.id }
-    //         ,
-    //         function (err, doc) {
-    //           if (err) {
-    //             res.send({success:false, msg:'Cannot read from database.'});
-    //             return;
-    //           }
-
-
-    //         }).populate('tasksImOn').exec(function(err, entry) {
-    //         if (err){
-    //              res.send({success:false, msg:'Error, couldnt populate with tasks.'});
-    //              return;
-    //         }
-            
-            
-            // var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
-            
-            //  for(var i =0;i<entry.tasksImOn.length;i++){
-            //     if(entry.tasksImOn[i].status==="DONE"){
-            //     var splited = []
-            //     splited = entry.tasksImOn[i].updatedAt.toString().split(" ");
-            //     var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
-            //      console.log(dateString);
-            //      if(!(dateString in mapOfPairs)){
-            //           mapOfPairs[dateString.toString()]=1;
-            //      }else{
-            //           mapOfPairs[dateString.toString()]++;
-            //      }
-            //     }
-            // }
-            // //vracam mapu koja sadrzi parove dan i broj uradjenih taskova po korisniku
-            // res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS PER USER",data:mapOfPairs});
-            
-            
-            
-   //     });
-   
-   
+ 
    
    
 })

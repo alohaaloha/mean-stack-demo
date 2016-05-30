@@ -90,6 +90,26 @@ angular.module('wsapp')
 		    }
 		}
 		 $http(req).then(onSuccess, onError);
+		},
+		getAllTasks : function(onSuccess,onError){
+			var req = {
+		    method: 'GET',
+		    url: '/api/task/all',
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    	}
+			}
+		 $http(req).then(onSuccess, onError);
+		},
+		getTasksByStatus : function(status,onSuccess,onError){
+			var req = {
+		    method: 'GET',
+		    url: '/api/task/filterbystatus/'+status,
+		    headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded'
+		    	}
+			}
+		 $http(req).then(onSuccess, onError);
 		}
 	}
 });

@@ -5,14 +5,40 @@
     <h4>
         Choose filter
     </h4>
-    
-    <select>
-            
-            <option value="volvo">TO DO</option>
-            <option value="saab">IN PROGRESS</option>
-            <option value="opel">DONE</option>
-            <option value="audi">VERIFY</option>
-    </select>
+    FILTER BY STATUS: {{filterByStatus}}
+    <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-click="changeFilter('NO FILTER')">NO FILTER</button>
+                <button type="button" class="btn btn-default" ng-click="changeFilter('TO DO')">TO DO</button>
+                <button type="button" class="btn btn-default" ng-click="changeFilter('IN PROGRESS')">IN PROGRESS</button>
+                <button type="button" class="btn btn-default" ng-click="changeFilter('VERIFY')">VERIFY</button>
+                <button type="button" class="btn btn-default" ng-click="changeFilter('DONE')">DONE</button>
+    </div>
+    </br>
+    </br>
+    </br>
+    <div class="row">
+            <div ng-repeat="model in tasks">
+                <div class="col-sm-6 col-md-4">
 
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h3>{{model.title}}</h3>
+                            <p>DESCRIPTION: {{model.description}}</p>
+                            <p>CREATED: {{model.createdAt}}</p>
+                            <p>CREATOR: {{model.creator.username}}</p>
+                            <p>STATUS: {{model.status}}</p>
+                            <p>PRIORITY: {{model.priority}}</p>
 
+                            <p>
+                                <button class="btn btn-success" type="button" ui-sref="taskdetail({id:model._id})">
+                                    <span class="glyphicon glyphicon-th-list"></span>
+                                    SEE TASK
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 </div>
