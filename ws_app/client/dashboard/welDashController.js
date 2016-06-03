@@ -4,7 +4,7 @@ angular.module('wsapp')
     .controller('WelDashController', function ($scope, $state, authService,taskService, projectService) {
 
 
- 
+
 	authService.authenticate(
                             function(response){
                               if(!response.data.success){
@@ -17,6 +17,8 @@ angular.module('wsapp')
                             function(response){
                               // $state.go('home');
                             });
+
+
   $scope.filterByStatus = "NO FILTER";
   $scope.allTasks=function(){
 
@@ -35,10 +37,10 @@ angular.module('wsapp')
                                   });
       }
    $scope.allTasks();
-   
-   
+
+
    $scope.changeFilter= function(paramOfFiltering){
-        
+
         if(paramOfFiltering==="NO FILTER"){
              taskService.getAllTasks(function(response){
                                       if(!response.data.success){
@@ -60,8 +62,8 @@ angular.module('wsapp')
               $state.go('home');
         });
         }
-     
-       
-   }  
+
+
+   }
 
     });
