@@ -37,8 +37,8 @@ userSchema.pre('save', function(next) {
   this.createdAt = currentDate;
   this.role='ROLE_USER';
   //transform password
-  //var hash = bcrypt.hashSync(this.password, salt);
-  //this.password=hash;
+  var hash = bcrypt.hashSync(this.password, salt);
+  this.password=hash;
   // predjemo na sledecu funckiju u lancu
   next();
 });

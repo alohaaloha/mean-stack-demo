@@ -13,15 +13,15 @@ router
 
      User.findOne(
 
-      {username: req.body.username}, 
-      
+      {username: req.body.username},
+
       function(err, user) {
 
           if (err){
               res.send({success: false, msg: 'Error.'});
               return;
           }
-      
+
           if (!user) {
               res.send({success: false, msg: 'Authentication failed. User not found.'});
           } else {
@@ -34,7 +34,7 @@ router
                     res.send({success: false, msg: 'Authentication failed. Wrong password.', WTF:req.body.password+" "+user.password});
                   }*/
 
-                  /*bcrypt.compare(req.body.password, user.password, function(erro, ress) {
+                  bcrypt.compare(req.body.password, user.password, function(erro, ress) {
                       // res == true
                       if(ress==true){
                           req.session.user = user;
@@ -43,15 +43,17 @@ router
                       res.send({success: false, msg: 'Authentication failed. Wrong password.', err:erro});
                       }
 
-                  });*/
+                  });
 
+                  /*
                   if (req.body.password===user.password) {
                     //TODO DTO umesto cistog user
                     req.session.user = user;
                     res.send({success: true, msg:'Successfully signed in!'});
                   } else {
-                    res.send({success: false, msg: 'Authentication failed. Wrong password.', WTF:req.body.password+" "+user.password});
+                    res.send({success: false, msg: 'Authentication failed. Wrong password.'});
                   }
+                  */
 
 
 

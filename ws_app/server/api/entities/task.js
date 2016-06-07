@@ -16,19 +16,19 @@ router.get('/filterbystatus/:id', function(req, res, next) {
               res.send({success:false, msg:'Error with database, cannot read user.'});
               return;
             }
-            
+
             var listOfFiltered = [];
-            
+
             for(var i=0;i<entry.length;i++){
                  if(entry[i].status===req.params.id){
                      listOfFiltered.push(entry[i]);
                  }
             }
-            
+
             res.json({success:true, msg:"TASKS",data:listOfFiltered});
 
       })
-                     
+
   }).get('/all', function(req, res, next) {
       Task.find({},function(err,entry){
            if (err) {
@@ -38,7 +38,7 @@ router.get('/filterbystatus/:id', function(req, res, next) {
             res.json({success:true, msg:"TASKS",data:entry});
 
       })
-                     
+
   }).get('/user', function(req, res, next) {
       User.findOne({_id:req.session.user._id},function(err,entry){
            if (err) {
@@ -125,12 +125,21 @@ router.get('/filterbystatus/:id', function(req, res, next) {
           body.updater=req.session.user.username; //init updater
           delete body.project;
           body.creator=req.session.user._id;
-          var task = new Task(body);
+
+
           Project.findOne({"_id":pID},function (err, entry) {
             if(err) next(err);
+
+
+            //body.oznaka="testOznaka2";
+            //console.log("NAZIV PROJECTA: "+entry.naziv)
+            body.oznaka=entry.title+"-" + (entry.taskInc++); //save od projetka ce uraditi ++ //NECEEEEEE
+
+
+            var task = new Task(body);
             task.save(function (err, task) {
               if(err) next(err);
-              Project.findByIdAndUpdate(entry._id, {$push:{"tasks":task._id}}, function (err, entry) {
+              Project.findByIdAndUpdate(entry._id, {$push:{"tasks":task._id}, taskInc:entry.taskInc++}, function (err, entry) {
                 if(err) next(err);
                 //res.json(entry);
                 res.json({success: true, msg: 'Successful created', data:task});

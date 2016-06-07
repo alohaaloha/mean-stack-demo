@@ -3,6 +3,9 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 var taskSchema = new Schema({
+  oznaka: {
+    type: String
+  },
   title: {
     type: String,
     required: true,

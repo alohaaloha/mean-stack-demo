@@ -3,6 +3,9 @@ var Schema = mongoose.Schema;
 
 // kreiramo novu shemu
 var projectSchema = new Schema({
+  taskInc: {
+    type:Number
+  },
   title: {
     type: String,
     required: true,
@@ -14,7 +17,7 @@ var projectSchema = new Schema({
   deadline: Date,
   createdAt: Date,
   updatedAt: Date,
-  usersOnProject : [{ type: Schema.Types.ObjectId, ref: 'User' }], 
+  usersOnProject : [{ type: Schema.Types.ObjectId, ref: 'User' }],
   creator: {
       type: Schema.Types.ObjectId,
       ref: 'User'
@@ -28,8 +31,8 @@ var projectSchema = new Schema({
  * // napomena! komentari su u ovom primeru implementirani kao reference zbog ilustracije rada sa referencama
   // u realnom sluacju bolje bi bilo implementirati ih kao poddokumente
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
- * 
- * 
+ *
+ *
  */
 
 // prilikom snimanja se postavi datum
@@ -43,6 +46,12 @@ projectSchema.pre('save', function(next) {
   if (!this.createdAt)
     this.createdAt = currentDate;
 
+  if(!this.taskInc){
+    this.taskInc=0;
+  }else {
+    //this.taskInc++;
+    //AAAAAAAAAAA NECE
+  }
 
   // predjemo na sledecu funckiju u lancu
   next();
