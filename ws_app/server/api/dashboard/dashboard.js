@@ -206,33 +206,41 @@ router
             }
 
             var user = req.body.user;
-              
+
             var mapOfPairs = {};   // map that contains key:value pair  {date - numberOfTasks}
             //if(entry.tasks[k]._id.equals(entry.usersOnProject[i].tasksImOn[j])){
-            //if(user.tasksImOn[j].equals(entry.tasks[i]._id)){  
+            //if(user.tasksImOn[j].equals(entry.tasks[i]._id)){
             for(var i =0;i<entry.tasks.length;i++){
                 if(entry.tasks[i].status==="DONE"){
-                    for(var j=0;j<user.tasksImOn.length;j++){
-                      if(entry.tasks[i]._id.equals(user.tasksImOn[j])){  
-                          var splited = []
-                          splited = entry.tasks[i].updatedAt.toString().split(" ");
-                          var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
-                          console.log(dateString);
-                          if(!(dateString in mapOfPairs)){
-                                mapOfPairs[dateString.toString()]=1;
-                          }else{
-                                mapOfPairs[dateString.toString()]++;
+                  console.log("TASKS IM ON");
+                  console.log(user.tasksImOn);
+                  if(user.tasksImOn){
+                    //fix, but why???????????????///
+                        for(var j=0;j<user.tasksImOn.length;j++){
+                          if(entry.tasks[i]._id.equals(user.tasksImOn[j])){
+                              var splited = []
+                              splited = entry.tasks[i].updatedAt.toString().split(" ");
+                              var dateString =""+splited[0]+" "+splited[1]+" "+splited[2]+" "+splited[3];
+                              console.log(dateString);
+                              if(!(dateString in mapOfPairs)){
+                                    mapOfPairs[dateString.toString()]=1;
+                              }else{
+                                    mapOfPairs[dateString.toString()]++;
+                              }
                           }
-                      }
-                    }
+                        }
+
+                  }
+
+
                }
             }
             res.json({success:true, msg:"DATE AND NUMBER OF FINISHED TASKS",data:mapOfPairs});
         });
-    
- 
-   
-   
+
+
+
+
 })
 
  module.exports = router;

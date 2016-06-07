@@ -53,7 +53,7 @@ userService.get($stateParams.id,
                                 });
 
 $scope.updateGraph = function () {
-        
+
         dashboardService.dynamicfinishingperUser($scope.selectedItem,$stateParams.id,
 function(res){
   console.log("Stigao je odgovor za peti dijagram");
@@ -82,7 +82,7 @@ for (var property in obj) {
       $scope.myChartObject5.data.rows.push(o1);
   }
 }
-   
+
 },
 function(res){
     console.log("ERRROOORRR RESPONSE!")
