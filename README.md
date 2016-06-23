@@ -1,8 +1,12 @@
 # web_services_pro
 
-- Project for Web Services Course at FTN, Novi Sad, 2016
+About
+- Project for Web Services Course, Faculty of Technical Sciences, Novi Sad.
+- Team: Nebojsa Popovic, Radomir Marinkovic
+- MEAN stack application similar to Trello.com. User can create project and add people to it, create tasks within project, monitor all tasks, etc...
 
-- MEAN stack application similar to Trello.com. User can create project and add people to it, create tasks within project, monitor all tasks, etc...  
+Stack
+- MEAN
 
 
 
