@@ -9,5 +9,8 @@
 ## Stack
 - MEAN
 
+![img](http://i.imgur.com/GiwYIuO.jpg)
+
+
 
 
